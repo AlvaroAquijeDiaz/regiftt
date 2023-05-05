@@ -12,10 +12,58 @@ datasource db {
     relationMode = "prisma"
 }
 
-model Example {
-    id        String   @id @default(cuid())
+model Gift {
+    id          String  @id @default(cuid())
+    name        String
+    description String?
+    image       String?
+    link        String?
+    price       Float?
+    visible     Boolean @default(true)
+    selected    Boolean @default(false)
+
+    owner            User?   @relation(fields: [ownerId], references: [id], name: "allMyGifts")
+    ownerId          String?
+    selectedBy       User?   @relation(fields: [selectedByUserId], references: [id])
+    selectedByUserId String?
+
+    lists GiftsOnLists[]
+
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
+
+    @@index([ownerId])
+    @@index([selectedByUserId])
+}
+
+model List {
+    id          String   @id @default(cuid())
+    name        String   @default("Unnamed List")
+    description String?
+    image       String?
+    dueOn       DateTime @default(now())
+    visible     Boolean  @default(true)
+
+    owner   User?          @relation(fields: [ownerId], references: [id])
+    ownerId String?
+    gifts   GiftsOnLists[]
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@index([ownerId])
+}
+
+model GiftsOnLists {
+    giftId String
+    listId String
+
+    gift Gift @relation(fields: [giftId], references: [id])
+    list List @relation(fields: [listId], references: [id])
+
+    @@id([giftId, listId])
+    @@index([listId])
+    @@index([giftId])
 }
 
 // Necessary for Next auth
@@ -50,12 +98,17 @@ model Session {
 
 model User {
     id            String    @id @default(cuid())
+    username      String?   @unique
     name          String?
     email         String?   @unique
     emailVerified DateTime?
     image         String?
     accounts      Account[]
     sessions      Session[]
+
+    myGifts   Gift[] @relation("allMyGifts")
+    myLists   List[]
+    givingOut Gift[]
 }
 
 model VerificationToken {
