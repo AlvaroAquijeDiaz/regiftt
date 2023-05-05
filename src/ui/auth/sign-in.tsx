@@ -6,10 +6,9 @@ export const SignIn = () => {
   return (
     <div>
       <button
-        // eslint-disable-next-line @typescript-eslint/no-misused-promises
         onClick={() =>
-          signIn(undefined, {
-            callbackUrl: "/",
+          void signIn("discord", {
+            callbackUrl: "/home",
           })
         }
       >

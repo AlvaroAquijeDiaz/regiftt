@@ -4,7 +4,7 @@ export const metadata = {
 };
 
 import "~/styles/globals.css";
-import { NextAuthProvider } from "~/ui/next-auth-provider";
+import { NextAuthProvider } from "~/ui/auth/next-auth-provider";
 
 export default function RootLayout({
   children,
