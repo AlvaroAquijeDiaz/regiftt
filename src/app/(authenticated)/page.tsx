@@ -1,16 +1,17 @@
-import { getServerSession } from "next-auth/next";
+import { db } from "~/server/db";
 import { SignIn } from "~/ui/sign-in";
 
 export default async function Home() {
-  const session = await getServerSession();
+  const users = await db.user.findMany();
 
   return (
     <div>
       <h1>Home</h1>
 
-      <pre>{JSON.stringify(session)}</pre>
+      <pre>{JSON.stringify(users)}</pre>
 
       <SignIn />
     </div>
   );
 }
+
