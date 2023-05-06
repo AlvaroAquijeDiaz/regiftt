@@ -4,21 +4,24 @@ import * as React from "react";
 import { cn } from "~/lib/cn";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background",
+  "inline-flex items-center justify-center rounded-full text-sm font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background",
   {
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground active:outline-none hover:bg-primary/90 hover:outline hover:outline-indigo-700 outline-offset-2 transition-all duration-150",
-        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline: "border border-input hover:bg-accent hover:text-accent-foreground",
-        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+          "bg-primary text-primary-foreground active:outline-none hover:bg-primary/90 active:scale-95 transition-all duration-100",
+        destructive:
+          "bg-red-700 dark:bg-red-900 text-destructive-foreground hover:bg-red-700/90 dark:hover:bg-red-900/90 active:scale-95 transition-all duration-100",
+        outline:
+          "border border-input hover:bg-accent hover:text-accent-foreground active:scale-95 transition-all duration-100",
+        secondary:
+          "bg-secondary text-secondary-foreground hover:bg-secondary/80 active:scale-95 transition-all duration-100",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "underline-offset-4 hover:underline text-primary",
       },
       size: {
-        default: "h-10 py-2 px-4",
-        sm: "h-9 px-3 rounded-md",
+        default: "py-2 px-4",
+        sm: "h-9 px-3",
         lg: "h-11 px-8 rounded-md",
       },
     },
@@ -38,6 +41,7 @@ export interface ButtonProps
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button";
+
     return (
       <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />
     );

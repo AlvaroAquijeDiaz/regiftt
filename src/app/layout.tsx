@@ -9,6 +9,7 @@ import { fontSans } from "~/lib/fonts";
 import { NextAuthProvider } from "~/providers/next-auth";
 import { ThemeProvider } from "~/providers/themes";
 import "~/styles/globals.css";
+import { StyleSwitcher } from "~/ui/theme/style-switcher";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -23,6 +24,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             className: "bg-neutral-700 text-neutral-100",
           }}
         />
+
+        <StyleSwitcher />
       </body>
     </html>
   );

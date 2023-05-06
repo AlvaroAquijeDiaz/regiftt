@@ -1,5 +1,5 @@
 import { db } from "~/server/db";
-import { Button } from "~/ui/shared/button";
+import { SignOut } from "~/ui/auth/sign-out";
 import { ThemeToggle } from "~/ui/theme/theme-toggle";
 
 export default async function Home() {
@@ -13,7 +13,7 @@ export default async function Home() {
 
       <ThemeToggle />
 
-      <Button>Test</Button>
+      <SignOut />
     </div>
   );
 }
