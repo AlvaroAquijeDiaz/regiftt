@@ -1,4 +1,4 @@
-import { SignIn } from "~/ui/auth/sign-in";
+import { SignIn } from '~/ui/auth/sign-in';
 
 export default function Home() {
   return (

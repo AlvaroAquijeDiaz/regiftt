@@ -1,19 +1,17 @@
-"use client";
+'use client';
 
-import { signIn } from "next-auth/react";
+import { signIn } from 'next-auth/react';
 
 export const SignIn = () => {
+  const discordSignIn = () => {
+    void signIn('discord', {
+      callbackUrl: '/home',
+    });
+  };
+
   return (
     <div>
-      <button
-        onClick={() =>
-          void signIn("discord", {
-            callbackUrl: "/home",
-          })
-        }
-      >
-        SignIn
-      </button>
+      <button onClick={discordSignIn}>SignIn</button>
     </div>
   );
 };

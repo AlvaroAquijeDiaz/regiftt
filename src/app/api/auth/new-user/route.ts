@@ -1,6 +1,6 @@
-import { NextResponse, type NextRequest } from "next/server";
-import { db } from "~/server/db";
-import { newUserSchema } from "~/server/schemas";
+import { NextResponse, type NextRequest } from 'next/server';
+import { newUserSchema } from '~/lib/schemas';
+import { db } from '~/server/db';
 
 export async function POST(req: NextRequest) {
   const body = (await req.json()) as unknown;
