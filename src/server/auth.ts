@@ -1,9 +1,10 @@
-import { PrismaAdapter } from '@next-auth/prisma-adapter';
-import { type GetServerSidePropsContext } from 'next';
-import { getServerSession, type DefaultSession, type NextAuthOptions } from 'next-auth';
-import DiscordProvider from 'next-auth/providers/discord';
-import { env } from '~/env.mjs';
-import { db } from './db';
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { type GetServerSidePropsContext } from "next";
+import { getServerSession, type DefaultSession, type NextAuthOptions } from "next-auth";
+import { type DefaultJWT } from "next-auth/jwt";
+import DiscordProvider from "next-auth/providers/discord";
+import { env } from "~/env.mjs";
+import { db } from "./db";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -11,13 +12,18 @@ import { db } from './db';
  *
  * @see https://next-auth.js.org/getting-started/typescript#module-augmentation
  */
-declare module 'next-auth' {
+declare module "next-auth" {
   interface Session extends DefaultSession {
     user: {
       id: string;
       // ...other properties
       username: string;
-    } & DefaultSession['user'];
+    } & DefaultSession["user"];
+  }
+
+  interface JWT extends DefaultJWT {
+    username: string;
+    id: string;
   }
 
   interface User {
@@ -33,17 +39,30 @@ declare module 'next-auth' {
  */
 export const authOptions: NextAuthOptions = {
   callbacks: {
-    session: ({ session, user }) => ({
+    jwt: ({ account, token, user }) => {
+      if (account && user) {
+        token.accessToken = account.access_token;
+        token.id = user.id;
+        token.username = user.username;
+      }
+
+      return token;
+    },
+
+    session: ({ session, token }) => ({
       ...session,
       user: {
         ...session.user,
-        id: user.id,
-        username: user.username,
+        id: token.id,
+        username: token.username,
       },
     }),
   },
+  session: {
+    strategy: "jwt",
+  },
   pages: {
-    newUser: '/new-user',
+    newUser: "/new-user",
   },
   adapter: PrismaAdapter(db),
   providers: [
@@ -69,8 +88,8 @@ export const authOptions: NextAuthOptions = {
  * @see https://next-auth.js.org/configuration/nextjs
  */
 export const getServerAuthSession = (ctx: {
-  req: GetServerSidePropsContext['req'];
-  res: GetServerSidePropsContext['res'];
+  req: GetServerSidePropsContext["req"];
+  res: GetServerSidePropsContext["res"];
 }) => {
   return getServerSession(ctx.req, ctx.res, authOptions);
 };
