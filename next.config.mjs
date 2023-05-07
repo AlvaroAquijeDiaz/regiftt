@@ -14,10 +14,10 @@ const config = {
    *
    * @see https://github.com/vercel/next.js/issues/41980
    */
-  i18n: {
-    locales: ["en", "es"],
-    defaultLocale: "en",
-  },
+  // i18n: {
+  //   locales: ["en", "es"],
+  //   defaultLocale: "en",
+  // },
   images: {
     domains: ["cdn.discordapp.com"],
   },
