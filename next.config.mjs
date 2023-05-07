@@ -18,6 +18,9 @@ const config = {
     locales: ["en", "es"],
     defaultLocale: "en",
   },
+  images: {
+    domains: ["cdn.discordapp.com"],
+  },
 };
 export default withRoutes({
   outDir: ".",

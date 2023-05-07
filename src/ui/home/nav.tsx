@@ -1,7 +1,7 @@
-import { AxeIcon, User } from "lucide-react";
+import { AxeIcon } from "lucide-react";
 import Link from "next/link";
 import { Button } from "../shared/button";
-import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "../shared/dialog";
+import { UserNavDropdown } from "./user-nav-dropdown";
 
 export const Nav = () => {
   return (
@@ -25,28 +25,8 @@ export const Nav = () => {
           </li>
 
           <li>
-            Delete account
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button variant="ghost">Delete account</Button>
-              </DialogTrigger>
-
-              <DialogContent>
-                <div className="flex flex-col gap-4">
-                  <DialogTitle>Are you sure you want to delete your account?</DialogTitle>
-                  <div className="flex gap-4">
-                    <Button variant="ghost">Yes</Button>
-                    <Button variant="ghost">No</Button>
-                  </div>
-                </div>
-              </DialogContent>
-            </Dialog>
-          </li>
-
-          <li>
-            <Button variant="ghost">
-              <User />
-            </Button>
+            {/* @ts-expect-error Server Components */}
+            <UserNavDropdown />
           </li>
         </span>
       </ul>

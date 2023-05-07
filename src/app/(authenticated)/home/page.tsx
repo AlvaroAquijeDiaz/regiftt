@@ -9,7 +9,7 @@ export default async function Home() {
     <div>
       <h1>Home</h1>
 
-      <pre>{JSON.stringify(users)}</pre>
+      <pre className="whitespace-pre-wrap">{JSON.stringify(users)}</pre>
 
       <ThemeToggle />
 

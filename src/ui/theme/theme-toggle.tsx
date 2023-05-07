@@ -2,7 +2,9 @@
 
 import { useTheme } from "next-themes";
 
+import { Laptop } from "lucide-react";
 import { Button } from "~/ui/shared/button";
+import { DropdownItem } from "../shared/dropdown";
 import { Icons } from "./icons";
 
 export function ThemeToggle() {
@@ -20,3 +22,26 @@ export function ThemeToggle() {
     </Button>
   );
 }
+
+export const SwitcherItems = () => {
+  const { setTheme } = useTheme();
+
+  return (
+    <>
+      <DropdownItem onClick={() => setTheme("light")} className="flex items-center gap-2">
+        <Icons.sun size={16} />
+        <span>Light</span>
+      </DropdownItem>
+
+      <DropdownItem onClick={() => setTheme("dark")} className="flex items-center gap-2">
+        <Icons.moon size={16} />
+        <span>Dark</span>
+      </DropdownItem>
+
+      <DropdownItem onClick={() => setTheme("system")} className="flex items-center gap-2">
+        <Laptop size={16} />
+        <span>System</span>
+      </DropdownItem>
+    </>
+  );
+};
