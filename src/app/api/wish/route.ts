@@ -7,10 +7,8 @@ const newWish = withRouteMiddleware(
   async (token, _req, _res, out) => {
     const data = await db.gift.create({
       data: {
+        ...out?.input,
         name: out?.input.name as string,
-        description: out?.input.description,
-        link: out?.input.url,
-        price: out?.input.price,
         owner: {
           connect: {
             id: token.id as string,
