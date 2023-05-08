@@ -1,7 +1,7 @@
 import { getToken, type JWT } from "next-auth/jwt";
 import { type NextRequest, type NextResponse } from "next/server";
 import { env } from "process";
-import { type ZodObject, type ZodRawShape } from "zod";
+import { z, type ZodObject, type ZodRawShape } from "zod";
 
 export const withRouteMiddleware = <T, V extends ZodRawShape>(
   handler: (
@@ -9,7 +9,7 @@ export const withRouteMiddleware = <T, V extends ZodRawShape>(
     req: NextRequest,
     res?: NextResponse,
     output?: {
-      input: V;
+      input: z.infer<ZodObject<V>>;
     }
   ) => Promise<T>,
   opts?: {
@@ -46,7 +46,7 @@ export const withRouteMiddleware = <T, V extends ZodRawShape>(
       }
 
       return handler(token, req, res, {
-        input: body,
+        input: parsed.data,
       });
     } catch (error) {
       return new Response(

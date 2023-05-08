@@ -3,7 +3,7 @@ import { z } from "zod";
 export const NewWishSchema = z.object({
   name: z.string().min(1).max(100),
   description: z.string().max(1000).optional(),
-  url: z.string().url().optional(),
+  url: z.string().optional(),
   price: z
     .number()
     .min(0)

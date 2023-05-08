@@ -1,7 +1,7 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { NewWishReturnHandler } from "~/app/api/wish/route";
+import { type NewWishReturnHandler } from "~/app/api/wish/route";
 import { fetcher } from "~/lib/fetcher";
 import { NewWishSchema } from "./my-wishes.schemas";
 
@@ -15,7 +15,6 @@ export const NewWishForm = () => {
     defaultValues: {
       name: "",
       price: 0,
-      url: "",
       description: "",
     },
   });
