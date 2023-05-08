@@ -1,8 +1,8 @@
 "use client";
 
+import { LogOut } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { Button } from "../shared/button";
 
 export const SignOut = () => {
   const router = useRouter();
@@ -17,10 +17,9 @@ export const SignOut = () => {
   };
 
   return (
-    <div>
-      <Button variant="outline" onClick={() => void handleSignOut()}>
-        Sign Out
-      </Button>
-    </div>
+    <span onClick={() => void handleSignOut()} className="flex items-center gap-2">
+      <LogOut size={16} />
+      Sign Out
+    </span>
   );
 };

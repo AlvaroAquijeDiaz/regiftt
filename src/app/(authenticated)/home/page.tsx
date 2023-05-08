@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { db } from "~/server/db";
 import { SignOut } from "~/ui/auth/sign-out";
 import { ThemeToggle } from "~/ui/theme/theme-toggle";
@@ -11,9 +12,13 @@ export default async function Home() {
 
       <pre className="whitespace-pre-wrap">{JSON.stringify(users)}</pre>
 
-      <ThemeToggle />
+      <Suspense fallback={<></>}>
+        <ThemeToggle />
+      </Suspense>
 
-      <SignOut />
+      <Suspense fallback={<></>}>
+        <SignOut />
+      </Suspense>
     </div>
   );
 }

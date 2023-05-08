@@ -1,6 +1,8 @@
 import { Cog, LayoutDashboard, Paintbrush, User } from "lucide-react";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
+import Link from "next/link";
+import { SignOut } from "../auth/sign-out";
 import {
   Dropdown,
   DropdownContent,
@@ -13,7 +15,7 @@ import {
 } from "../shared/dropdown";
 import { SwitcherItems } from "../theme/theme-toggle";
 
-export const UserNavDropdown = async () => {
+export const NavDropdown = async () => {
   const session = await getServerSession();
 
   return (
@@ -26,6 +28,7 @@ export const UserNavDropdown = async () => {
             className="rounded-full"
             width={40}
             height={40}
+            priority={true}
           />
         ) : (
           <LayoutDashboard size={25} />
@@ -35,10 +38,12 @@ export const UserNavDropdown = async () => {
       <DropdownContent>
         <DropdownLabel>My Account</DropdownLabel>
 
-        <DropdownItem>
-          <User size={16} />
-          Profile
-        </DropdownItem>
+        <Link href="/me">
+          <DropdownItem>
+            <User size={16} />
+            Me
+          </DropdownItem>
+        </Link>
 
         <DropdownItem>
           <Cog size={16} />
@@ -55,6 +60,10 @@ export const UserNavDropdown = async () => {
             <SwitcherItems />
           </DropdownSubContent>
         </DropdownSub>
+
+        <DropdownItem>
+          <SignOut />
+        </DropdownItem>
       </DropdownContent>
     </Dropdown>
   );

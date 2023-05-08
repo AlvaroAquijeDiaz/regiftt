@@ -1,7 +1,7 @@
 import { AxeIcon } from "lucide-react";
 import Link from "next/link";
 import { Button } from "../shared/button";
-import { UserNavDropdown } from "./user-nav-dropdown";
+import { NavDropdown } from "./nav-dropdown";
 
 export const Nav = () => {
   return (
@@ -19,14 +19,14 @@ export const Nav = () => {
 
         <span className="flex items-center gap-2">
           <li>
-            <Link href="/home">
+            <Link href="/my-wishes">
               <Button variant="ghost">My Wishes</Button>
             </Link>
           </li>
 
           <li>
-            {/* @ts-expect-error Server Components */}
-            <UserNavDropdown />
+            {/* @ts-expect-error RSC */}
+            <NavDropdown />
           </li>
         </span>
       </ul>
