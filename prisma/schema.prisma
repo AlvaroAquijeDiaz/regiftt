@@ -1,8 +1,12 @@
-generator client {
+generator kysely {
     provider = "prisma-kysely"
 
     output   = "../src/server"
     fileName = "db.types.ts"
+}
+
+generator client {
+    provider = "prisma-client-js"
 }
 
 datasource db {
