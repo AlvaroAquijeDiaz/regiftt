@@ -21,7 +21,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         <Toaster
           toastOptions={{
-            className: "bg-neutral-700 text-neutral-100",
+            style: {
+              backgroundColor: "#27272a",
+              border: "1px solid #525252",
+              borderRadius: "9999px",
+              color: "var(--color-neutral-100)",
+            },
           }}
         />
 
