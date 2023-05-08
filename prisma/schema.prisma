@@ -1,5 +1,8 @@
 generator client {
-    provider = "prisma-client-js"
+    provider = "prisma-kysely"
+
+    output   = "../src/server"
+    fileName = "db.types.ts"
 }
 
 datasource db {
@@ -100,6 +103,7 @@ model User {
     id            String    @id @default(cuid())
     username      String?   @unique
     name          String?
+    bio           String?
     email         String?   @unique
     emailVerified DateTime?
     image         String?

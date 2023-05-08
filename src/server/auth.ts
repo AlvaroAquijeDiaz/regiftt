@@ -1,9 +1,11 @@
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { type GetServerSidePropsContext } from "next";
 import { getServerSession, type DefaultSession, type NextAuthOptions } from "next-auth";
-import { type DefaultJWT } from "next-auth/jwt";
+import { type DefaultJWT, type JWT } from "next-auth/jwt";
 import DiscordProvider from "next-auth/providers/discord";
+import { type NextRequest, type NextResponse } from "next/server";
 import { env } from "~/env.mjs";
+import { fetcher } from "~/lib/fetcher";
 import { db } from "./db";
 
 /**
@@ -92,4 +94,22 @@ export const getServerAuthSession = (ctx: {
   res: GetServerSidePropsContext["res"];
 }) => {
   return getServerSession(ctx.req, ctx.res, authOptions);
+};
+
+export const getRSCToken = async () => {
+  return await fetcher<JWT>(env.NEXTAUTH_URL + "/api/token");
+};
+
+export const withEnforceAuth = async (
+  handler: (req: NextRequest, res?: NextResponse) => unknown
+) => {
+  const token = await getRSCToken();
+
+  if (token) {
+    return handler;
+  }
+
+  return new Response("UNAUTHORIZED", {
+    status: 401,
+  });
 };
