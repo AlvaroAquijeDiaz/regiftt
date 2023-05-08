@@ -9,6 +9,7 @@ export async function fetcher<JSON = unknown>(
   opts?: {
     method?: "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
     body?: Record<string, unknown>;
+    isClient?: boolean;
   },
   init?: RequestInitWithoutBodyOrMethod
 ): Promise<JSON> {
@@ -36,7 +37,7 @@ export async function fetcher<JSON = unknown>(
   } catch (error) {
     const fixedError = error as SWRError;
 
-    toast.error(fixedError.message);
+    opts?.isClient && toast.error(fixedError.message);
     return Promise.resolve({} as JSON);
   }
 }
