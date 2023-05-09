@@ -5,7 +5,7 @@ import { NavDropdown } from "./nav-dropdown";
 
 export const Nav = () => {
   return (
-    <nav className="border-b border-border px-4 py-4 md:px-14">
+    <nav className="sticky inset-0 border-b border-border bg-background/50 px-4 py-4 backdrop-blur backdrop-filter md:px-24">
       <ul className="flex justify-between">
         <span>
           <li>

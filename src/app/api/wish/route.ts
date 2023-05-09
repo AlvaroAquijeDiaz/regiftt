@@ -43,6 +43,9 @@ const allWishes = withRouteMiddleware(async (token, _req, _res) => {
     where: {
       ownerId: token.id as string,
     },
+    orderBy: {
+      createdAt: "desc",
+    },
   });
 
   return NextResponse.json(wishes);

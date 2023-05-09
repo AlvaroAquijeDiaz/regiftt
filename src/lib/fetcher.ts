@@ -4,6 +4,16 @@ export type SWRError = Error & { status?: number; message?: string };
 
 type RequestInitWithoutBodyOrMethod = Omit<RequestInit, "body" | "method">;
 
+export type FetcherProps = {
+  input: RequestInfo;
+  opts?: {
+    method?: "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
+    body?: Record<string, unknown>;
+    isClient?: boolean;
+  };
+  init?: RequestInitWithoutBodyOrMethod;
+};
+
 export async function fetcher<JSON = unknown>(
   input: RequestInfo,
   opts?: {

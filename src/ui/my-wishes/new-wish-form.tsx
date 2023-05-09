@@ -2,6 +2,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
+import { mutate } from "swr";
 import { fetcher } from "~/lib/fetcher";
 import { Button } from "../shared/button";
 import { NewWishSchema } from "./my-wishes.schemas";
@@ -15,13 +16,13 @@ export const NewWishForm = () => {
     resolver: zodResolver(NewWishSchema),
     defaultValues: {
       name: "",
-      price: 0,
+      price: undefined,
       description: "",
     },
   });
 
-  const onSubmit = (data: NewWishSchema) => {
-    void toast.promise(
+  const onSubmit = async (data: NewWishSchema) => {
+    await toast.promise(
       fetcher(`/api/wish`, {
         method: "POST",
         body: data,
@@ -33,6 +34,11 @@ export const NewWishForm = () => {
         error: "Error creating wish",
       }
     );
+
+    /**
+     * @description SWR Keys MUST be the same, arrays included
+     */
+    await mutate("/api/wish");
   };
 
   return (
