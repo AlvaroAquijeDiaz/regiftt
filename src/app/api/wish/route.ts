@@ -1,4 +1,3 @@
-import { revalidatePath, revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
 import { db } from "~/server/db";
 import { withRouteMiddleware } from "~/server/with-route-middleware";
@@ -19,12 +18,6 @@ const newWish = withRouteMiddleware(
         },
       },
     });
-
-    const tag = _req.nextUrl.searchParams.get("my-wishes");
-    const path = _req.nextUrl.searchParams.get("/my-wishes");
-
-    tag && revalidateTag(tag);
-    path && revalidatePath(path);
 
     return NextResponse.json({
       ...data,

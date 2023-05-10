@@ -3,6 +3,7 @@ import { type Session } from "next-auth";
 import useSWR from "swr";
 import { fetcher } from "~/lib/fetcher";
 import { type Gift } from "~/server/db.types";
+import { EditWishDropdown } from "./edit-wish-dropdown";
 
 export const WishesGrid = ({ session }: { session: Session | null }) => {
   const all = useSWR<Gift[]>(
@@ -24,6 +25,8 @@ export const WishesGrid = ({ session }: { session: Session | null }) => {
       {all.data.map((gift) => {
         return (
           <article key={gift.id} className="grid grid-rows-3 rounded-lg border p-5">
+            <EditWishDropdown id={gift.id} />
+
             <h2>
               Name: <span className="font-bold tracking-wide">{gift.name}</span>
             </h2>
