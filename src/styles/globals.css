@@ -17,7 +17,7 @@
     --card-foreground: 222.2 47.4% 11.2%;
 
     --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
+    --input: 0, 0%, 97%;
 
     --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210 40% 98%;
@@ -51,7 +51,7 @@
 
     /* TODO: May change this border */
     --border: 240, 5%, 26%;
-    --input: 216 34% 17%;
+    --input: 0, 0%, 19%;
 
     --primary: 210 40% 98%;
     --primary-foreground: 222.2 47.4% 1.2%;
