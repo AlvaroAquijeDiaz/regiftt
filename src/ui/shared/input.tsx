@@ -26,7 +26,7 @@ export const Input = <I extends FieldValues>({
   const Render = as;
 
   return (
-    <fieldset className="flex flex-col gap-1">
+    <fieldset className="flex h-24 flex-col gap-1">
       <AutoLabel htmlFor={displayName}>{displayName}</AutoLabel>
 
       <Render
@@ -34,8 +34,8 @@ export const Input = <I extends FieldValues>({
           "rounded-md border border-neutral-300 bg-input px-2 py-1 transition-all duration-100 placeholder:text-neutral-400 focus:bg-input/60 focus:outline-none focus:ring-2 focus:ring-indigo-600 dark:border-neutral-600 placeholder:dark:text-neutral-500",
           props.className
         )}
-        {...(as === "textarea" && { rows: 3 })}
         placeholder={props.placeholder || ""}
+        {...(as === "textarea" && { rows: 3 })}
         {...register(displayName, rules)}
       />
 
