@@ -5,16 +5,22 @@ import { fetcher } from "~/lib/fetcher";
 import { type Gift } from "~/server/db.types";
 
 export const WishesGrid = ({ session }: { session: Session | null }) => {
-  const all = useSWR<Gift[]>("/api/wish", fetcher, {
-    isVisible: () => !!session,
-  });
+  const all = useSWR<Gift[]>(
+    "/api/wish",
+    !!session
+      ? (key: string) =>
+          fetcher(key, {
+            isClient: true,
+          })
+      : null
+  );
 
   if (!all.data) {
-    return <p>Loading...</p>;
+    return <p>Loading... TODO: Skeleton</p>;
   }
 
   return (
-    <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+    <section className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
       {all.data.map((gift) => {
         return (
           <article key={gift.id} className="grid grid-rows-3 rounded-lg border p-5">
@@ -23,7 +29,7 @@ export const WishesGrid = ({ session }: { session: Session | null }) => {
             </h2>
 
             <p>
-              Description:
+              Description:{" "}
               {gift.description || <span className="italic text-neutral-400">No description</span>}
             </p>
 

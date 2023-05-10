@@ -5,7 +5,9 @@ export const NewWishSchema = z.object({
   description: z.string().max(1000).optional(),
   url: z.string().optional(),
   price: z
-    .number()
+    .number({
+      invalid_type_error: "Please enter a valid number",
+    })
     .min(0)
     .max(10000000, {
       message: "Mmm 10M for a gift is a bit too much, don't you think?",
