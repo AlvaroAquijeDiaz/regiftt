@@ -1,19 +1,14 @@
 "use client";
-import { type Session } from "next-auth";
 import useSWR from "swr";
 import { fetcher } from "~/lib/fetcher";
 import { type Gift } from "~/server/db.types";
 import { EditWishDropdown } from "./edit-wish-dropdown";
 
-export const WishesGrid = ({ session }: { session: Session | null }) => {
-  const all = useSWR<Gift[]>(
-    "/api/wish",
-    !!session
-      ? (key: string) =>
-          fetcher(key, {
-            isClient: true,
-          })
-      : null
+export const WishesGrid = () => {
+  const all = useSWR<Gift[]>("/api/wish", (key: string) =>
+    fetcher(key, {
+      isClient: true,
+    })
   );
 
   if (!all.data) {

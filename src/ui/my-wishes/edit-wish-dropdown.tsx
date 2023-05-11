@@ -28,8 +28,9 @@ export const EditWishDropdown = ({ id }: { id: string }) => {
   return (
     <Dropdown>
       <DropdownTrigger className="focus-within:outline-none" asChild>
-        <Button size="sm" variant="outline" className="gap-2">
+        <Button size="sm" variant="outline" className="gap-2" disabled={isMutating}>
           Menu <MoreHorizontal size={15} />
+          {isMutating && <Spinner />}
         </Button>
       </DropdownTrigger>
 
