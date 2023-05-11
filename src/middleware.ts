@@ -16,5 +16,5 @@ export default async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/home/:path*", "/my-wishes/:path*"],
+  matcher: ["/home/:path*", "/my-wishes/:path*", "/me/:path*"],
 };
