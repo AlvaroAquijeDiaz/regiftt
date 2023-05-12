@@ -1,11 +1,10 @@
 import { MoreHorizontal, Trash } from "lucide-react";
-import { fetcher } from "~/lib/fetcher";
-import { Button } from "../shared/button";
-import { Dropdown, DropdownContent, DropdownItem, DropdownTrigger } from "../shared/dropdown";
-
 import { toast } from "react-hot-toast";
 import { useSWRConfig } from "swr";
 import useSWRMutation from "swr/mutation";
+import { fetcher } from "~/lib/fetcher";
+import { Button } from "../shared/button";
+import { Dropdown, DropdownContent, DropdownItem, DropdownTrigger } from "../shared/dropdown";
 import { Spinner } from "../shared/spinner";
 
 export const EditWishDropdown = ({ id }: { id: string }) => {

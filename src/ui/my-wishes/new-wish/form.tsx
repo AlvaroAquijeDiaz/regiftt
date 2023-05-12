@@ -82,18 +82,24 @@ export const NewWishForm = ({ onClose }: { onClose: (v: boolean) => void }) => {
           />
         </div>
 
-        <Input<NewWishSchema>
-          register={register}
-          errors={errors}
-          displayName="url"
-          placeholder="https://example.com"
-          rules={{
-            pattern: {
-              value: /https?:\/\/\S+/,
-              message: "Must be a valid URL",
-            },
-          }}
-        />
+        <div>
+          <Input<NewWishSchema>
+            register={register}
+            errors={errors}
+            displayName="url"
+            placeholder="https://example.com"
+            rules={{
+              pattern: {
+                value: /https?:\/\/\S+/,
+                message: "Must be a valid URL",
+              },
+            }}
+          />
+
+          <div className="w-full rounded-lg border bg-input px-4 py-[84px] text-center">
+            <span className="italic text-neutral-500">URL Preview</span>
+          </div>
+        </div>
       </section>
 
       <Button type="submit" className="mt-3 block" disabled={isSubmitting}>

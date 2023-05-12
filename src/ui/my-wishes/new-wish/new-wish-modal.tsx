@@ -13,7 +13,7 @@ export const NewWishModal = () => {
         <Button className="inline-flex w-max">Add New</Button>
       </DialogTrigger>
 
-      <DialogContent>
+      <DialogContent className="shadow-xl shadow-violet-500/30 dark:shadow-xl">
         <DialogTitle className="text-2xl">What would you like?</DialogTitle>
 
         <NewWishForm onClose={setOpen} />
