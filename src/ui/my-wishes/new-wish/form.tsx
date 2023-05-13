@@ -1,27 +1,35 @@
 "use client";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { useSWRConfig } from "swr";
 import { fetcher } from "~/lib/fetcher";
 import { Spinner } from "~/ui/shared/spinner";
+import { Switch } from "~/ui/shared/switch";
 import { Button } from "../../shared/button";
 import { Input } from "../../shared/input";
 import { NewWishSchema } from "../my-wishes.schemas";
 
 export const NewWishForm = ({ onClose }: { onClose: (v: boolean) => void }) => {
   const { mutate } = useSWRConfig();
+  const [parent] = useAutoAnimate({
+    duration: 150,
+  });
 
   const {
     handleSubmit,
     register,
     formState: { errors, isSubmitting },
+    watch,
+    setValue,
   } = useForm<NewWishSchema>({
     resolver: zodResolver(NewWishSchema),
     defaultValues: {
       name: "",
       price: undefined,
       description: "",
+      priceKnown: false,
     },
   });
 
@@ -29,7 +37,10 @@ export const NewWishForm = ({ onClose }: { onClose: (v: boolean) => void }) => {
     await toast.promise(
       fetcher(`/api/wish`, {
         method: "POST",
-        body: data,
+        body: {
+          ...data,
+          price: Number(data.price),
+        },
         isClient: true,
       }),
       {
@@ -57,15 +68,36 @@ export const NewWishForm = ({ onClose }: { onClose: (v: boolean) => void }) => {
             placeholder="Porsche 992 GT3RS"
           />
 
-          <Input<NewWishSchema>
-            register={register}
-            errors={errors}
-            displayName="price"
-            placeholder="250,000"
-            rules={{
-              valueAsNumber: true,
-            }}
-          />
+          <div className="grid h-24 items-start gap-1" ref={parent}>
+            <div className="flex items-center justify-between">
+              <p className="flex items-center gap-2">
+                <span className="font-semibold">Price?</span>
+
+                {watch("priceKnown") && <span className="text-indigo-600">Estimate</span>}
+              </p>
+
+              <Switch onCheckedChange={(v) => setValue("priceKnown", v)} />
+            </div>
+
+            {!watch("priceKnown") && (
+              <span className="pointer-events-none flex h-14 select-none items-center justify-center rounded-lg border bg-input text-neutral-400">
+                Unknown or not estimated
+              </span>
+            )}
+
+            {watch("priceKnown") && (
+              <Input<NewWishSchema>
+                showLabel={false}
+                register={register}
+                errors={errors}
+                displayName="price"
+                placeholder="$250,000"
+                // rules={{
+                //   valueAsNumber: true,
+                // }}
+              />
+            )}
+          </div>
 
           <Input<NewWishSchema>
             register={register}
