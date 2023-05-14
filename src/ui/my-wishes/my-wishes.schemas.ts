@@ -17,7 +17,7 @@ export const NewWishSchema = z
       })
       .optional(),
   })
-  .refine((data) => data.priceKnown === true && data.price !== undefined, {
+  .refine((data) => data.priceKnown === false && (data.price === undefined || isNaN(data.price)), {
     message: "Please enter a price if you know an estimate",
   });
 
