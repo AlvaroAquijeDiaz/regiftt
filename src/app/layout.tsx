@@ -26,7 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               border: "1px solid #525252",
               borderRadius: "9999px",
               fontSize: "0.9rem",
-              color: "var(--color-neutral-100)",
+              color: "#eee",
             },
           }}
         />
