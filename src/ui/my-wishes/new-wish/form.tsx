@@ -33,13 +33,15 @@ export const NewWishForm = ({ onClose }: { onClose: (v: boolean) => void }) => {
     },
   });
 
+  console.log({ errors });
+
   const onSubmit = async (data: NewWishSchema) => {
     await toast.promise(
       fetcher(`/api/wish`, {
         method: "POST",
         body: {
           ...data,
-          price: Number(data.price),
+          price: isNaN(Number(data.price)) ? undefined : Number(data.price),
         },
         isClient: true,
       }),
