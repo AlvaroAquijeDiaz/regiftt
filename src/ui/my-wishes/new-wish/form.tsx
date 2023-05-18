@@ -66,12 +66,13 @@ export const NewWishForm = ({ onClose }: { onClose: (v: boolean) => void }) => {
             errors={errors}
             displayName="name"
             placeholder="Porsche 992 GT3RS"
+            showRequiredInLabel
           />
 
           <div className="grid h-24 items-start gap-1" ref={parent}>
             <div className="flex items-center justify-between">
               <p className="flex items-center gap-2">
-                <span className="font-semibold">Price?</span>
+                <span className="font-semibold">Price</span>
 
                 {watch("priceKnown") && <span className="text-indigo-600">Estimate</span>}
               </p>
@@ -92,9 +93,9 @@ export const NewWishForm = ({ onClose }: { onClose: (v: boolean) => void }) => {
                 errors={errors}
                 displayName="price"
                 placeholder="$250,000"
-                // rules={{
-                //   valueAsNumber: true,
-                // }}
+                rules={{
+                  setValueAs: (v) => (!!v ? Number(v) : undefined),
+                }}
               />
             )}
           </div>
