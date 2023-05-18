@@ -16,6 +16,7 @@ export const Input = <I extends FieldValues>({
   errors,
   rules,
   showLabel = true,
+  showRequiredInLabel = false,
   ...props
 }: {
   showLabel?: boolean;
@@ -24,12 +25,17 @@ export const Input = <I extends FieldValues>({
   errors: FieldErrors<I>;
   rules?: RegisterOptions;
   as?: "input" | "textarea";
+  showRequiredInLabel?: boolean;
 } & Omit<InputHTMLAttributes<HTMLInputElement>, "type">) => {
   const Render = as;
 
   return (
-    <fieldset className="flex h-24 flex-col gap-1">
-      {showLabel && <AutoLabel htmlFor={displayName}>{displayName}</AutoLabel>}
+    <fieldset className={cn("flex h-24 flex-col gap-1", props.className)}>
+      {showLabel && (
+        <AutoLabel htmlFor={displayName}>
+          {displayName} {showRequiredInLabel && <span className="text-red-500">*</span>}
+        </AutoLabel>
+      )}
 
       <Render
         className={cn(
