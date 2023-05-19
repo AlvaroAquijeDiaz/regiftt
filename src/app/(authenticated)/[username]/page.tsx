@@ -1,3 +1,6 @@
+import { Suspense } from "react";
+import Loader from "~/ui/my-wishes/[wishID]/loader";
+import { GiftsByUsername } from "./gifts-by-username";
 import { UserDetails } from "./user-details";
 
 export default function PageByUsername({
@@ -12,8 +15,15 @@ export default function PageByUsername({
       <h1>Page By Username</h1>
       <p>{username}</p>
 
-      {/* @ts-expect-error RSC */}
-      <UserDetails username={username} />
+      <Suspense fallback={<Loader />}>
+        {/* @ts-expect-error RSC */}
+        <UserDetails username={username} />
+      </Suspense>
+
+      <Suspense fallback={<Loader />}>
+        {/* @ts-expect-error RSC */}
+        <GiftsByUsername username={username} />
+      </Suspense>
     </div>
   );
 }
