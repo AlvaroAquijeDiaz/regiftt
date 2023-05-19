@@ -4,7 +4,7 @@ export default function AuthenticatedLayout({ children }: { children: React.Reac
   return (
     <>
       <Nav />
-      <main className="min-h-full px-4 sm:px-8 md:px-24">{children}</main>
+      <main className="h-full px-4 pt-2 sm:px-8 md:px-24">{children}</main>
     </>
   );
 }
