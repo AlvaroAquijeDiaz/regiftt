@@ -10,6 +10,8 @@ import { fetcher } from "~/lib/fetcher";
 import { type User } from "~/server/db.types";
 import { editProfileSchema, type EditProfileSchema } from "~/ui/profile/profile.schemas";
 import { Button } from "../shared/button";
+import { Input } from "../shared/input";
+import { Spinner } from "../shared/spinner";
 
 export const DetailsForm = () => {
   const { data: user, mutate } = useSWR<Partial<User>>("/api/auth/user", fetcher);
@@ -17,8 +19,8 @@ export const DetailsForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
     setValue,
+    formState: { errors, isSubmitting },
   } = useForm<EditProfileSchema>({
     resolver: zodResolver(editProfileSchema),
   });
@@ -52,59 +54,54 @@ export const DetailsForm = () => {
 
   return (
     <form
-      className="flex max-w-sm flex-col gap-4 py-8"
+      className="flex max-w-sm flex-col py-8"
       onSubmit={(evt) => void handleSubmit(onSubmit)(evt)}
     >
-      <span className="flex w-full items-center justify-between gap-2">
-        <label htmlFor="name">Name</label>
+      {!user ? (
+        <span className="animate-pulse">
+          <span className="inline-flex h-5 w-40 rounded-lg border bg-gray-200 dark:bg-neutral-600" />
+        </span>
+      ) : (
+        <Input<EditProfileSchema>
+          displayName="name"
+          errors={errors}
+          register={register}
+          className="flex-row items-center justify-between"
+        />
+      )}
 
-        {!user ? (
-          <span className="animate-pulse">
-            <span className="inline-flex h-5 w-40 rounded-lg border bg-gray-200 dark:bg-neutral-600" />
-          </span>
-        ) : (
-          <input
-            className="w-64 rounded px-4 py-1 focus:bg-neutral-800 focus:outline-none focus:ring focus:ring-indigo-700"
-            type="text"
-            {...register("name")}
-          />
-        )}
-      </span>
+      {!user ? (
+        <span className="animate-pulse">
+          <span className="inline-flex h-5 w-40 rounded-lg border bg-gray-200 dark:bg-neutral-600" />
+        </span>
+      ) : (
+        <Input<EditProfileSchema>
+          displayName="username"
+          errors={errors}
+          register={register}
+          className="flex-row items-center justify-between"
+        />
+      )}
 
-      <span className="flex w-full items-center justify-between gap-2">
-        <label htmlFor="username">Username</label>
-
-        {!user ? (
-          <span className="animate-pulse">
-            <span className="inline-flex h-5 w-40 rounded-lg border bg-gray-200 dark:bg-neutral-600" />
-          </span>
-        ) : (
-          <input
-            type="text"
-            className="w-64 rounded px-4 py-1 focus:bg-neutral-800 focus:outline-none focus:ring focus:ring-indigo-700"
-            {...register("username")}
-          />
-        )}
-      </span>
-
-      <span className="flex w-full items-start justify-between gap-2">
-        <label htmlFor="bio">Bio</label>
-
-        {!user ? (
-          <span className="animate-pulse">
-            <span className="inline-flex h-14 w-40 rounded-lg border bg-gray-200 dark:bg-neutral-600" />
-          </span>
-        ) : (
-          <textarea
-            className="w-64 rounded px-4 py-1 focus:bg-neutral-800 focus:outline-none focus:ring focus:ring-indigo-700"
-            {...register("bio")}
-            rows={4}
-          />
-        )}
-      </span>
+      {!user ? (
+        <span className="animate-pulse">
+          <span className="inline-flex h-14 w-40 rounded-lg border bg-gray-200 dark:bg-neutral-600" />
+        </span>
+      ) : (
+        <Input<EditProfileSchema>
+          displayName="bio"
+          errors={errors}
+          register={register}
+          className="flex-row justify-between"
+          as="textarea"
+        />
+      )}
 
       <span>
-        <Button type="submit">Save</Button>
+        <Button type="submit" disabled={isSubmitting}>
+          {isSubmitting && <Spinner />}
+          {!isSubmitting && "Save"}
+        </Button>
       </span>
     </form>
   );

@@ -1,5 +1,5 @@
 "use client";
-import { ArrowLeft } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Button } from "../shared/button";
 
@@ -13,7 +13,7 @@ export const Return = () => {
       className="px-0 text-neutral-500"
       onClick={router.back.bind(router)}
     >
-      <ArrowLeft size={15} />
+      <ChevronLeft size={15} />
       Go Back
     </Button>
   );

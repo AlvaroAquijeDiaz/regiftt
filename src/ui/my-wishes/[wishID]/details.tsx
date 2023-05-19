@@ -1,7 +1,6 @@
-import Link from "next/link";
-import { Suspense } from "react";
+import { ShareIcon } from "lucide-react";
+import { notFound } from "next/navigation";
 import { db } from "~/server/db";
-import Loader from "~/ui/my-wishes/[wishID]/loader";
 import { Button } from "~/ui/shared/button";
 
 const getWishByID = async (wishID: string) => {
@@ -14,25 +13,31 @@ export default async function Details({ wishID }: { wishID: string }) {
   const wish = await getWishByID(wishID);
 
   if (!wish) {
-    return (
-      <div>
-        Wish not found
-        <Link href="/my-wishes">
-          <Button>Go Back</Button>
-        </Link>
-      </div>
-    );
+    return notFound();
   }
 
   return (
-    <section>
-      <Suspense fallback={<Loader />}>
-        <span>Description</span>
+    <section className="flex flex-col gap-2">
+      <p>Image: {wish.image}</p>
 
-        <p>{wish.description}</p>
+      <p>Description: {wish.description}</p>
 
-        <p>{wish.createdAt.toDateString()}</p>
-      </Suspense>
+      <p>{wish.link}</p>
+
+      <p>${wish.price}</p>
+
+      <p>
+        {wish.selected
+          ? `Selected by ${wish.selectedByUserId || ""}`
+          : "Not Selected by anyone yet"}
+      </p>
+
+      <p>{wish.createdAt.toDateString()}</p>
+
+      <Button className="max-w-fit">
+        <ShareIcon size={17} />
+        Share
+      </Button>
     </section>
   );
 }
