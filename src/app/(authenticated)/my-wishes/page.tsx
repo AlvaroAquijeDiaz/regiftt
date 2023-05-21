@@ -1,4 +1,4 @@
-import { NewWishModal } from "~/ui/my-wishes/new-wish/new-wish-modal";
+import { NewListOrGift } from "~/ui/my-wishes/new-list";
 import { WishesGrid } from "~/ui/my-wishes/wishes-grid";
 
 export default function MyWishesPage() {
@@ -7,7 +7,7 @@ export default function MyWishesPage() {
       <header className="flex justify-between">
         <h1 className="text-3xl font-bold">My Wishes</h1>
 
-        <NewWishModal />
+        <NewListOrGift />
       </header>
 
       <WishesGrid />
