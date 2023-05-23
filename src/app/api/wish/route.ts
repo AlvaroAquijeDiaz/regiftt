@@ -4,16 +4,19 @@ import { withRouteMiddleware } from "~/server/with-route-middleware";
 import { NewWishSchema } from "~/ui/my-wishes/my-wishes.schemas";
 
 const newWish = withRouteMiddleware(
-  async (token, _req, _res, out) => {
+  async ({ token, out }) => {
+    const generatedID = Date.now();
+
     const data = await db.gift.create({
       data: {
-        name: out?.input.name as string,
-        link: out?.input.url,
-        description: out?.input.description,
-        price: out?.input.price,
+        name: out?.name as string,
+        link: out?.url,
+        description: out?.description,
+        price: out?.price,
+        slug: `${out?.name.toString().replaceAll(" ", "-") as string}-${generatedID}`,
         owner: {
           connect: {
-            id: token.id as string,
+            id: token.id,
           },
         },
       },
@@ -31,10 +34,10 @@ const newWish = withRouteMiddleware(
 
 export type NewWishReturnHandler = Awaited<typeof newWish>;
 
-const allWishes = withRouteMiddleware(async (token, _req, _res) => {
+const allWishes = withRouteMiddleware(async ({ token }) => {
   const wishes = await db.gift.findMany({
     where: {
-      ownerId: token.id as string,
+      ownerId: token.id,
     },
     orderBy: {
       createdAt: "desc",

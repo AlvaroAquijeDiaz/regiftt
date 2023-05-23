@@ -5,7 +5,7 @@ import { Button } from "~/ui/shared/button";
 
 const getWishByID = async (wishID: string) => {
   return await db.gift.findUnique({
-    where: { id: wishID },
+    where: { slug: wishID },
   });
 };
 

@@ -1,15 +1,9 @@
 import { Suspense } from "react";
 import Details from "~/ui/my-wishes/[wishID]/details";
-import Loader from "~/ui/my-wishes/[wishID]/loader";
+import { Spinner } from "~/ui/shared/spinner";
 
 // TODO: Make the blobs animated and moving around
-export default function WishIDPage({
-  searchParams: { name },
-  params: { wishId },
-}: {
-  params: { wishId: string };
-  searchParams: { name: string };
-}) {
+export default function WishIDPage({ params: { wishId } }: { params: { wishId: string } }) {
   return (
     <section className="relative h-full">
       <svg
@@ -67,9 +61,11 @@ export default function WishIDPage({
       </svg>
 
       <div className="anim relative mt-2 flex h-full flex-col gap-4 rounded-lg border bg-white/60 px-6 py-4 shadow-lg backdrop-blur-lg backdrop-filter sm:gap-8 sm:px-12 sm:py-8 md:gap-12 md:py-10">
-        <h1 className="text-2xl font-black capitalize md:text-3xl lg:text-4xl">{name}</h1>
+        <h1 className="text-2xl font-black capitalize md:text-3xl lg:text-4xl">
+          {wishId.split("-").slice(0, -1).join(" ")}
+        </h1>
 
-        <Suspense fallback={<Loader />}>
+        <Suspense fallback={<Spinner />}>
           {/* @ts-expect-error RSC */}
           <Details wishID={wishId} />
         </Suspense>

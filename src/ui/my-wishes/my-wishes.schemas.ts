@@ -18,3 +18,10 @@ export const NewWishSchema = z.object({
 });
 
 export type NewWishSchema = z.infer<typeof NewWishSchema>;
+
+export const newListSchema = z.object({
+  name: z.string().min(1).max(100),
+  description: z.string().max(1000).optional(),
+});
+
+export type NewListSchema = z.infer<typeof newListSchema>;

@@ -1,25 +1,18 @@
-"use client";
-import useSWR from "swr";
-import { fetcher } from "~/lib/fetcher";
-import { type Gift } from "~/server/db.types";
+import { db } from "~/server/db";
 import { WishCard } from "./wish-card";
 
-export const WishesGrid = () => {
-  const all = useSWR<Gift[]>("/api/wish", (key: string) =>
-    fetcher(key, {
-      isClient: true,
-    })
-  );
+const getAllWishes = async () => {
+  return await db.gift.findMany();
+};
 
-  if (!all.data) {
-    return <p>Loading... TODO: Skeleton</p>;
-  }
+export const WishesGrid = async () => {
+  const all = await getAllWishes();
 
   return (
     <section className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3">
-      {all.data.map((gift) => {
-        return <WishCard key={gift.id} wish={gift} />;
-      })}
+      {all.map((gift) => (
+        <WishCard key={gift.id} wish={gift} />
+      ))}
     </section>
   );
 };

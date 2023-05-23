@@ -1,5 +1,7 @@
+import { Suspense } from "react";
 import { NewListOrGift } from "~/ui/my-wishes/new-list";
 import { WishesGrid } from "~/ui/my-wishes/wishes-grid";
+import { Spinner } from "~/ui/shared/spinner";
 
 export default function MyWishesPage() {
   return (
@@ -10,7 +12,10 @@ export default function MyWishesPage() {
         <NewListOrGift />
       </header>
 
-      <WishesGrid />
+      <Suspense fallback={<Spinner />}>
+        {/* @ts-expect-error RSC */}
+        <WishesGrid />
+      </Suspense>
     </section>
   );
 }

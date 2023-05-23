@@ -1,11 +1,11 @@
 import { type DropdownMenuItemProps, type DropdownMenuProps } from "@radix-ui/react-dropdown-menu";
-import { Gift } from "lucide-react";
+import { List } from "lucide-react";
 import { forwardRef } from "react";
-import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "~/ui/shared/dialog";
-import { DropdownItem } from "~/ui/shared/dropdown";
-import { NewWishForm } from "./form";
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "../../shared/dialog";
+import { DropdownItem } from "../../shared/dropdown";
+import { NewListForm } from "./form";
 
-export const NewWishModal = forwardRef<
+export const NewListModal = forwardRef<
   HTMLDivElement,
   DropdownMenuItemProps &
     Omit<DropdownMenuProps, "onOpenChange" | "onSelect"> & {
@@ -26,18 +26,18 @@ export const NewWishModal = forwardRef<
     <Dialog onOpenChange={menuOpenChange} open={dialogOpen}>
       <DialogTrigger asChild>
         <DropdownItem {...itemProps} onSelect={handleIsBeingSelected} ref={forwardRef}>
-          <Gift size={17} />
-          Wish
+          <List size={17} />
+          List
         </DropdownItem>
       </DialogTrigger>
 
-      <DialogContent className="shadow-xl dark:shadow-xl">
-        <DialogTitle className="text-2xl">What would you like?</DialogTitle>
+      <DialogContent className="shadow-xl dark:shadow-xl sm:max-w-xl">
+        <DialogTitle className="text-2xl">Add a new Wish List!</DialogTitle>
 
-        <NewWishForm onClose={menuOpenChange} />
+        <NewListForm onClose={menuOpenChange} />
       </DialogContent>
     </Dialog>
   );
 });
 
-NewWishModal.displayName = "NewWishModal";
+NewListModal.displayName = "NewListModal";

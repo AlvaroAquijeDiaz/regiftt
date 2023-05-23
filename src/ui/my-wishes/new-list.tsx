@@ -1,12 +1,26 @@
 "use client";
 
-import { List, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
+import dynamic from "next/dynamic";
 import { useRef, useState } from "react";
 import { Button } from "../shared/button";
-import { Dropdown, DropdownContent, DropdownItem, DropdownTrigger } from "../shared/dropdown";
-import { NewWishModal } from "./new-wish/new-wish-modal";
+import { Dropdown, DropdownContent, DropdownTrigger } from "../shared/dropdown";
+import { Spinner } from "../shared/spinner";
 
-// TODO: Make the dropdown close when the modal opens
+const DynamicNewWishModal = dynamic(
+  () => import("./new-wish/new-wish-modal").then((mod) => mod.NewWishModal),
+  {
+    loading: () => <Spinner />,
+  }
+);
+
+const DynamicNewListModal = dynamic(
+  () => import("./new-list/new-list-modal").then((mod) => mod.NewListModal),
+  {
+    loading: () => <Spinner />,
+  }
+);
+
 export const NewListOrGift = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [hasOpenDialog, setHasOpenDialog] = useState(false);
@@ -42,12 +56,15 @@ export const NewListOrGift = () => {
           }
         }}
       >
-        <NewWishModal onSelect={handleDialogItemSelect} onOpenChange={handleDialogItemOpenChange} />
+        <DynamicNewWishModal
+          onOpenChange={handleDialogItemOpenChange}
+          onSelect={handleDialogItemSelect}
+        />
 
-        <DropdownItem>
-          <List size={17} />
-          New List Modal
-        </DropdownItem>
+        <DynamicNewListModal
+          onOpenChange={handleDialogItemOpenChange}
+          onSelect={handleDialogItemSelect}
+        />
       </DropdownContent>
     </Dropdown>
   );

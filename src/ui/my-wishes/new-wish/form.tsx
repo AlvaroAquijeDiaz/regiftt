@@ -1,4 +1,3 @@
-"use client";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -11,7 +10,7 @@ import { Button } from "../../shared/button";
 import { Input } from "../../shared/input";
 import { NewWishSchema } from "../my-wishes.schemas";
 
-export const NewWishForm = ({ onClose }: { onClose: (v: boolean) => void }) => {
+export const NewWishForm = ({ onClose }: { onClose?: (v: boolean) => void | undefined }) => {
   const { mutate } = useSWRConfig();
   const [parent] = useAutoAnimate({
     duration: 150,
@@ -54,13 +53,13 @@ export const NewWishForm = ({ onClose }: { onClose: (v: boolean) => void }) => {
      * @description SWR Keys MUST be the same, arrays included
      */
     await mutate("/api/wish");
-    onClose(false);
+    onClose && onClose(false);
   };
 
   return (
-    <form onSubmit={(evt) => void handleSubmit(onSubmit)(evt)} className="my-4 flex-col gap-4">
-      <section className="mb-6 grid gap-x-6 sm:grid-cols-2">
-        <div className="grid gap-x-4">
+    <form onSubmit={(evt) => void handleSubmit(onSubmit)(evt)} className="mt-4 flex flex-col gap-2">
+      <section className="mb-6 grid gap-x-6 gap-y-4 sm:grid-cols-2">
+        <div className="grid gap-x-4 gap-y-4">
           <Input<NewWishSchema>
             register={register}
             errors={errors}
@@ -69,7 +68,7 @@ export const NewWishForm = ({ onClose }: { onClose: (v: boolean) => void }) => {
             showRequiredInLabel
           />
 
-          <div className="grid h-24 items-start gap-1" ref={parent}>
+          <div className="grid h-20 items-start gap-1" ref={parent}>
             <div className="flex items-center justify-between">
               <p className="flex items-center gap-2">
                 <span className="font-semibold">Price</span>
@@ -81,7 +80,7 @@ export const NewWishForm = ({ onClose }: { onClose: (v: boolean) => void }) => {
             </div>
 
             {!watch("priceKnown") && (
-              <span className="pointer-events-none flex h-14 select-none items-center justify-center rounded-lg border bg-input text-neutral-400">
+              <span className="pointer-events-none flex h-10 select-none items-center justify-center rounded-lg border bg-input text-neutral-400">
                 Unknown or not estimated
               </span>
             )}
@@ -115,7 +114,7 @@ export const NewWishForm = ({ onClose }: { onClose: (v: boolean) => void }) => {
           />
         </div>
 
-        <div>
+        <div className="flex flex-col gap-4">
           <Input<NewWishSchema>
             register={register}
             errors={errors}
@@ -135,7 +134,7 @@ export const NewWishForm = ({ onClose }: { onClose: (v: boolean) => void }) => {
         </div>
       </section>
 
-      <Button type="submit" className="mt-3 block" disabled={isSubmitting}>
+      <Button type="submit" disabled={isSubmitting}>
         {isSubmitting && <Spinner />}
         {!isSubmitting && "Create"}
       </Button>

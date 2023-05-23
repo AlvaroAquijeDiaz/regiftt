@@ -30,7 +30,7 @@ export const Input = <I extends FieldValues>({
   const Render = as;
 
   return (
-    <fieldset className={cn("flex h-24 flex-col gap-1", props.className)}>
+    <fieldset className={cn("flex flex-col gap-0.5", showLabel ? "h-20" : "h-14", props.className)}>
       {showLabel && (
         <AutoLabel htmlFor={displayName}>
           {displayName} {showRequiredInLabel && <span className="text-red-500">*</span>}

@@ -1,10 +1,10 @@
+import { type Gift } from "@prisma/client/edge";
 import Image from "next/image";
 import Link, { type LinkProps } from "next/link";
-import { type Gift } from "~/server/db.types";
 
 export const WishCard = ({ wish }: { wish: Gift }) => {
   return (
-    <Link href={`/my-wishes/${wish.id}?name=${wish.name}` as LinkProps["href"]} passHref>
+    <Link href={`/my-wishes/${wish.slug}` as LinkProps["href"]} passHref>
       <article
         key={wish.id}
         className={`grid h-[225px] w-full ${
