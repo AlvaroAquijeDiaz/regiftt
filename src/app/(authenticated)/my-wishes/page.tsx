@@ -13,7 +13,6 @@ export default function MyWishesPage() {
       </header>
 
       <Suspense fallback={<Spinner />}>
-        {/* @ts-expect-error RSC */}
         <WishesGrid />
       </Suspense>
     </section>

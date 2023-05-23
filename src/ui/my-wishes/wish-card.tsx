@@ -1,6 +1,6 @@
-import { type Gift } from "@prisma/client/edge";
 import Image from "next/image";
 import Link, { type LinkProps } from "next/link";
+import { type Gift } from "~/server/db.types";
 
 export const WishCard = ({ wish }: { wish: Gift }) => {
   return (
