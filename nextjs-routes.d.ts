@@ -13,9 +13,9 @@ declare module "nextjs-routes" {
   export type Route =
     | DynamicRoute<"/[username]", { "username": string }>
     | StaticRoute<"/home">
-    | StaticRoute<"/me">
-    | DynamicRoute<"/my-wishes/[wishId]", { "wishId": string }>
-    | StaticRoute<"/my-wishes">
+    | StaticRoute<"/my">
+    | DynamicRoute<"/my/wishes/[wishId]", { "wishId": string }>
+    | StaticRoute<"/profile">
     | StaticRoute<"/">
     | StaticRoute<"/new-user">;
 

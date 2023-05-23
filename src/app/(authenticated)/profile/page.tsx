@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { DetailsForm } from "~/ui/profile/details";
 
 export default function Profile() {
@@ -5,7 +6,9 @@ export default function Profile() {
     <section>
       <h1 className="text-3xl font-bold">Profile</h1>
 
-      <DetailsForm />
+      <Suspense>
+        <DetailsForm />
+      </Suspense>
     </section>
   );
 }
