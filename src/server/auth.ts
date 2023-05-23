@@ -23,14 +23,16 @@ declare module "next-auth" {
     } & DefaultSession["user"];
   }
 
-  interface JWT extends DefaultJWT {
-    username: string;
-    id: string;
-  }
-
   interface User {
     // ...other properties
     username: string;
+  }
+}
+
+declare module "next-auth/jwt" {
+  interface JWT extends DefaultJWT {
+    username: string;
+    id: string;
   }
 }
 

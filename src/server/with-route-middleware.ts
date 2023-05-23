@@ -4,14 +4,17 @@ import { env } from "process";
 import { type z, type ZodObject, type ZodRawShape } from "zod";
 
 export const withRouteMiddleware = <T, V extends ZodRawShape>(
-  handler: (
-    token: JWT,
-    req: NextRequest,
-    res?: NextResponse,
-    output?: {
-      input: z.infer<ZodObject<V>>;
-    }
-  ) => Promise<T>,
+  handler: ({
+    token,
+    req,
+    res,
+    out,
+  }: {
+    token: JWT;
+    req: NextRequest;
+    res?: NextResponse;
+    out?: z.infer<ZodObject<V>>;
+  }) => Promise<T>,
   opts?: {
     validator: ZodObject<V>;
   }
@@ -29,7 +32,7 @@ export const withRouteMiddleware = <T, V extends ZodRawShape>(
     }
 
     if (!opts?.validator) {
-      return handler(token, req, res);
+      return handler({ token, req, res });
     }
 
     try {
@@ -45,9 +48,7 @@ export const withRouteMiddleware = <T, V extends ZodRawShape>(
         );
       }
 
-      return handler(token, req, res, {
-        input: parsed.data,
-      });
+      return handler({ token, req, res, out: parsed.data });
     } catch (error) {
       return new Response(
         JSON.stringify({

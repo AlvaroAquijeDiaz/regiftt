@@ -24,6 +24,7 @@ export type Gift = {
   image: string | null;
   link: string | null;
   price: number | null;
+  slug: string;
   visible: Generated<number>;
   selected: Generated<number>;
   ownerId: string | null;

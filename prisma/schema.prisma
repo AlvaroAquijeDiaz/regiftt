@@ -26,6 +26,7 @@ model Gift {
     image       String?
     link        String?
     price       Float?
+    slug        String  @unique
     visible     Boolean @default(true)
     selected    Boolean @default(false)
 
