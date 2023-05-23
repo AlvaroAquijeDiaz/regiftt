@@ -1,5 +1,4 @@
-import { type JWT } from "next-auth";
-import { getToken } from "next-auth/jwt";
+import { getToken, type JWT } from "next-auth/jwt";
 import { type NextRequest } from "next/server";
 import { env } from "~/env.mjs";
 import { db } from "~/server/db";
