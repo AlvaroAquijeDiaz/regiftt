@@ -19,7 +19,7 @@ export const Nav = () => {
 
         <span className="flex items-center gap-2">
           <li>
-            <Link href="/my-wishes">
+            <Link href="/dashboard">
               <Button variant="ghost">My Wishes</Button>
             </Link>
           </li>

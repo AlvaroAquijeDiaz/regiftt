@@ -38,10 +38,10 @@ export const NavDropdown = async () => {
       <DropdownContent>
         <DropdownLabel>My Account</DropdownLabel>
 
-        <Link href="/me">
+        <Link href="/profile">
           <DropdownItem>
             <User size={16} />
-            Me
+            Profile
           </DropdownItem>
         </Link>
 
