@@ -1,4 +1,5 @@
 "use client";
+import { notFound } from "next/navigation";
 import useSWR from "swr";
 import { fetcher } from "~/lib/fetcher";
 import { type Gift } from "~/server/db.types";
@@ -10,6 +11,10 @@ export const WishesGrid = () => {
       isClient: true,
     })
   );
+
+  if (all.error) {
+    notFound();
+  }
 
   if (!all.data) {
     return <p>Loading... TODO: Skeleton</p>;

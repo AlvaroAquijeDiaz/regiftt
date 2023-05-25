@@ -2,13 +2,17 @@ import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
-import { useSWRConfig } from "swr";
+import useSWR, { useSWRConfig } from "swr";
+import { type MetatagsResponse } from "~/app/api/metatags/route";
 import { fetcher } from "~/lib/fetcher";
+import { useDebounce } from "~/lib/useDebounce";
+import { isValidUrl } from "~/lib/utils";
 import { Spinner } from "~/ui/shared/spinner";
 import { Switch } from "~/ui/shared/switch";
 import { Button } from "../../shared/button";
 import { Input } from "../../shared/input";
 import { NewWishSchema } from "../my-wishes.schemas";
+import { Preview } from "./preview";
 
 export const NewWishForm = ({ onClose }: { onClose?: (v: boolean) => void | undefined }) => {
   const { mutate } = useSWRConfig();
@@ -29,8 +33,21 @@ export const NewWishForm = ({ onClose }: { onClose?: (v: boolean) => void | unde
       price: undefined,
       description: "",
       priceKnown: false,
+      url: "",
     },
   });
+
+  const debouncedURL = useDebounce(watch("url"));
+
+  const previewURL = useSWR<MetatagsResponse>(
+    `/api/metatags?url=${debouncedURL || ""}`,
+    isValidUrl(debouncedURL || "")
+      ? (key) =>
+          fetcher(key as string, {
+            isClient: true,
+          })
+      : null
+  );
 
   const onSubmit = async (data: NewWishSchema) => {
     await toast.promise(
@@ -57,9 +74,12 @@ export const NewWishForm = ({ onClose }: { onClose?: (v: boolean) => void | unde
   };
 
   return (
-    <form onSubmit={(evt) => void handleSubmit(onSubmit)(evt)} className="mt-4 flex flex-col gap-2">
-      <section className="mb-6 grid gap-x-6 gap-y-4 sm:grid-cols-2">
-        <div className="grid gap-x-4 gap-y-4">
+    <form
+      onSubmit={(evt) => void handleSubmit(onSubmit)(evt)}
+      className="mt-4 flex h-full flex-col gap-2"
+    >
+      <section className="mb-4 grid max-h-full gap-x-4 gap-y-2 sm:grid-cols-2">
+        <div className="grid gap-4">
           <Input<NewWishSchema>
             register={register}
             errors={errors}
@@ -73,30 +93,23 @@ export const NewWishForm = ({ onClose }: { onClose?: (v: boolean) => void | unde
               <p className="flex items-center gap-2">
                 <span className="font-semibold">Price</span>
 
-                {watch("priceKnown") && <span className="text-indigo-600">Estimate</span>}
+                {watch("priceKnown") && <span className="text-sm text-indigo-600">Estimate</span>}
               </p>
 
               <Switch onCheckedChange={(v) => setValue("priceKnown", v)} />
             </div>
 
-            {!watch("priceKnown") && (
-              <span className="pointer-events-none flex h-10 select-none items-center justify-center rounded-lg border bg-input text-neutral-400">
-                Unknown or not estimated
-              </span>
-            )}
-
-            {watch("priceKnown") && (
-              <Input<NewWishSchema>
-                showLabel={false}
-                register={register}
-                errors={errors}
-                displayName="price"
-                placeholder="$250,000"
-                rules={{
-                  setValueAs: (v) => (!!v ? Number(v) : undefined),
-                }}
-              />
-            )}
+            <Input<NewWishSchema>
+              register={register}
+              showLabel={false}
+              errors={errors}
+              disabled={!watch("priceKnown")}
+              rules={{
+                setValueAs: (v) => (!!v ? Number(v) : undefined),
+              }}
+              displayName="price"
+              placeholder="$250,000"
+            />
           </div>
 
           <Input<NewWishSchema>
@@ -111,6 +124,20 @@ export const NewWishForm = ({ onClose }: { onClose?: (v: boolean) => void | unde
                 message: "Must be less than 100 characters",
               },
             }}
+          />
+
+          <Input<NewWishSchema>
+            register={register}
+            errors={errors}
+            displayName="description"
+            placeholder="Optional description ..."
+            rules={{
+              maxLength: {
+                value: 100,
+                message: "Must be less than 100 characters",
+              },
+            }}
+            fullHeight
           />
         </div>
 
@@ -128,9 +155,7 @@ export const NewWishForm = ({ onClose }: { onClose?: (v: boolean) => void | unde
             }}
           />
 
-          <div className="w-full rounded-lg border bg-input px-4 py-[84px] text-center">
-            <span className="italic text-neutral-500">URL Preview</span>
-          </div>
+          <Preview metatags={previewURL} />
         </div>
       </section>
 

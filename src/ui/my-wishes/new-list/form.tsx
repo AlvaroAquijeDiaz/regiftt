@@ -40,7 +40,7 @@ export const NewListForm = ({ onClose }: { onClose?: (b: boolean) => void }) => 
   };
 
   return (
-    <form onSubmit={(evt) => void handleSubmit(onSubmit)(evt)} className="mt-4 flex flex-col gap-4">
+    <form onSubmit={(evt) => void handleSubmit(onSubmit)(evt)} className="mt-4 flex flex-col gap-2">
       <Input<NewListSchema>
         register={register}
         errors={errors}
@@ -55,9 +55,9 @@ export const NewListForm = ({ onClose }: { onClose?: (b: boolean) => void }) => 
         as="textarea"
       />
 
-      <Button type="submit" className="mt-4" disabled={isSubmitting}>
+      <Button type="submit" className="mt-10" disabled={isSubmitting}>
         {isSubmitting && <Spinner />}
-        {!isSubmitting && "Add"}
+        {!isSubmitting && "Create"}
       </Button>
     </form>
   );

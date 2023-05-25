@@ -4,12 +4,12 @@ import { type Gift } from "~/server/db.types";
 
 export const WishCard = ({ wish }: { wish: Gift }) => {
   return (
-    <Link href={`/my-wishes/${wish.slug}` as LinkProps["href"]} passHref>
+    <Link href={`/dashboard/wishes/${wish.slug}` as LinkProps["href"]} passHref>
       <article
         key={wish.id}
         className={`grid h-[225px] w-full ${
           wish.image ? "grid-cols-2" : "grid-cols-1"
-        } rounded-xl border-2 border-dashed border-neutral-200 bg-gradient-to-br from-blue-50 via-white to-violet-200 shadow-lg dark:border-border`}
+        } rounded-xl border-2 border-dashed border-indigo-800/50 bg-gradient-to-br from-blue-50 via-white to-violet-200 shadow-lg dark:border-border`}
       >
         <section className="flex h-full flex-col justify-between gap-2 p-3 sm:p-4">
           <div className="flex h-full w-full flex-col gap-2">

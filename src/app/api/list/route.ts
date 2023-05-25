@@ -35,6 +35,21 @@ const all = withRouteMiddleware(async ({ token }) => {
     orderBy: {
       createdAt: "desc",
     },
+    select: {
+      id: true,
+      name: true,
+      visible: true,
+      gifts: {
+        select: {
+          gift: {
+            select: {
+              id: true,
+              name: true,
+            },
+          },
+        },
+      },
+    },
   });
 
   return NextResponse.json(lists);

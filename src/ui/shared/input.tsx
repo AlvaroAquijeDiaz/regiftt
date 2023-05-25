@@ -17,6 +17,7 @@ export const Input = <I extends FieldValues>({
   rules,
   showLabel = true,
   showRequiredInLabel = false,
+  fullHeight = false,
   ...props
 }: {
   showLabel?: boolean;
@@ -26,11 +27,18 @@ export const Input = <I extends FieldValues>({
   rules?: RegisterOptions;
   as?: "input" | "textarea";
   showRequiredInLabel?: boolean;
-} & Omit<InputHTMLAttributes<HTMLInputElement>, "type">) => {
+  fullHeight?: boolean;
+} & Omit<InputHTMLAttributes<HTMLInputElement & HTMLTextAreaElement>, "type">) => {
   const Render = as;
 
   return (
-    <fieldset className={cn("flex flex-col gap-0.5", showLabel ? "h-20" : "h-14", props.className)}>
+    <fieldset
+      className={cn(
+        "flex flex-col gap-0.5",
+        showLabel ? (fullHeight ? "h-full" : "h-20") : "h-14",
+        props.className
+      )}
+    >
       {showLabel && (
         <AutoLabel htmlFor={displayName}>
           {displayName} {showRequiredInLabel && <span className="text-red-500">*</span>}
@@ -39,12 +47,13 @@ export const Input = <I extends FieldValues>({
 
       <Render
         className={cn(
-          "rounded-md border bg-input px-2 py-1 transition-all duration-100 placeholder:text-neutral-400 focus:bg-input/60 focus:outline-none focus:ring-2 focus:ring-indigo-600 dark:border-neutral-600 placeholder:dark:text-neutral-500",
-          props.className
+          "rounded-md border bg-input px-2 py-1 transition-all duration-100 placeholder:text-neutral-400 focus:bg-input/60 focus:outline-none focus:ring-2 focus:ring-indigo-600 disabled:cursor-not-allowed disabled:border-dashed disabled:bg-transparent disabled:placeholder:text-neutral-300 dark:border-neutral-600 placeholder:dark:text-neutral-500",
+          fullHeight && "h-full"
         )}
         placeholder={props.placeholder || ""}
-        {...(as === "textarea" && { rows: 3 })}
+        {...(as === "textarea" && { rows: 4 })}
         {...register(displayName, rules)}
+        {...props}
       />
 
       {errors[displayName]?.message && (
