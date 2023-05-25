@@ -8,12 +8,6 @@ export const nanoid = customAlphabet(
   7
 );
 
-// Initiate Redis instance by connecting to REST URL
-export const redis = new Redis({
-  url: env.UPSTASH_REDIS_REST_URL,
-  token: env.UPSTASH_REDIS_REST_TOKEN,
-});
-
 // Create a new rate limiter, that allows 10 requests per 10 seconds by default
 export const ratelimit = (
   requests = 10,
@@ -31,18 +25,3 @@ export const ratelimit = (
         limit: () => ({ success: true }),
       };
 };
-
-/**
- * Recording metatags that were generated via `/api/edge/metatags`
- * If there's an error, it will be logged to a separate redis list for debugging
- **/
-export async function recordMetatags(url: string, error: boolean) {
-  if (url === "https://github.com/AlvaroAquijeDiaz/regiftt") {
-    // don't log metatags generation for default URL
-    return null;
-  } else {
-    return await redis.lpush(error ? "metatags-errors" : "metatags", {
-      url,
-    });
-  }
-}

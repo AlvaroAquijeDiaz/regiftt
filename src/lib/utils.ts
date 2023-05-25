@@ -1,5 +1,4 @@
 import parse from "node-html-parser";
-import { recordMetatags } from "./upstash";
 
 export const isValidUrl = (url: string) => {
   try {
@@ -129,8 +128,6 @@ export const getMetaTags = async (url: string) => {
     object["image_src"] ||
     object["icon"] ||
     object["shortcut icon"];
-
-  await recordMetatags(url, title && description && image ? false : true);
 
   return {
     title: title || url,
