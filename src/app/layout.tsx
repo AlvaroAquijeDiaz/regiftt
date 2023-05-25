@@ -23,9 +23,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" suppressHydrationWarning>
       <head>
         <meta charSet="UTF-8" />
-
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
+
       <body className={cn("font-sans antialiased", fontSans.variable)}>
         <ThemeProvider attribute="class" defaultTheme="light">
           <NextAuthProvider>{children}</NextAuthProvider>
