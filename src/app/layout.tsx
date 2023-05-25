@@ -1,8 +1,15 @@
-export const metadata = {
+export const metadata: Metadata = {
   title: "Regiftt",
   description: "The new social media to share wishes and desires",
+  authors: [
+    {
+      name: "Alvaro Aquije",
+      url: "https://twitter.com/@alvaro_dotdev",
+    },
+  ],
 };
 
+import { type Metadata } from "next";
 import { Toaster } from "react-hot-toast";
 import { cn } from "~/lib/cn";
 import { fontSans } from "~/lib/fonts";
@@ -16,10 +23,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" suppressHydrationWarning>
       <head>
         <meta charSet="UTF-8" />
-        <meta
-          httpEquiv="Content-Security-Policy"
-          content="default-src 'self'; connect-src vitals.vercel-insights.com"
-        />
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
