@@ -14,6 +14,7 @@ const newWish = withRouteMiddleware(
         description: out?.description,
         price: out?.price,
         slug: `${out?.name.toString().replaceAll(" ", "-") as string}-${generatedID}`,
+        visible: out?.private,
         owner: {
           connect: {
             id: token.id,

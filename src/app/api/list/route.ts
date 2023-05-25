@@ -1,26 +1,45 @@
 import { NextResponse } from "next/server";
+import { type SWRError } from "~/lib/fetcher";
 import { db } from "~/server/db";
 import { withRouteMiddleware } from "~/server/with-route-middleware";
 import { newListSchema } from "~/ui/my-wishes/my-wishes.schemas";
 
 const newList = withRouteMiddleware(
   async ({ token, out }) => {
-    const data = await db.list.create({
-      data: {
-        name: out?.name,
-        description: out?.description,
-        owner: {
-          connect: {
-            id: token.id,
+    try {
+      const data = await db.list.create({
+        data: {
+          name: out?.name,
+          description: out?.description,
+          owner: {
+            connect: {
+              id: token.id,
+            },
+          },
+          gifts: {
+            create: out?.wishIDs?.map((gift) => ({
+              gift: {
+                connect: {
+                  id: gift,
+                },
+              },
+            })),
           },
         },
-      },
-    });
+      });
 
-    return NextResponse.json({
-      ...data,
-      ok: true,
-    });
+      return NextResponse.json({
+        ...data,
+        ok: true,
+      });
+    } catch (e) {
+      const error = e as SWRError;
+
+      return NextResponse.json({
+        ok: false,
+        error,
+      });
+    }
   },
   {
     validator: newListSchema,
