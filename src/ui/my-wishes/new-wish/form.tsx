@@ -1,5 +1,5 @@
-import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { EyeOff, Tag } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import useSWR, { useSWRConfig } from "swr";
@@ -7,6 +7,7 @@ import { type MetatagsResponse } from "~/app/api/metatags/route";
 import { fetcher } from "~/lib/fetcher";
 import { useDebounce } from "~/lib/useDebounce";
 import { isValidUrl } from "~/lib/utils";
+import { Checkbox } from "~/ui/shared/checkbox";
 import { Spinner } from "~/ui/shared/spinner";
 import { Switch } from "~/ui/shared/switch";
 import { Button } from "../../shared/button";
@@ -16,9 +17,6 @@ import { Preview } from "./preview";
 
 export const NewWishForm = ({ onClose }: { onClose?: (v: boolean) => void | undefined }) => {
   const { mutate } = useSWRConfig();
-  const [parent] = useAutoAnimate({
-    duration: 150,
-  });
 
   const {
     handleSubmit,
@@ -34,6 +32,7 @@ export const NewWishForm = ({ onClose }: { onClose?: (v: boolean) => void | unde
       description: "",
       priceKnown: false,
       url: "",
+      private: false,
     },
   });
 
@@ -56,6 +55,7 @@ export const NewWishForm = ({ onClose }: { onClose?: (v: boolean) => void | unde
         body: {
           ...data,
           price: isNaN(Number(data.price)) ? undefined : Number(data.price),
+          private: data.private ? false : true,
         },
         isClient: true,
       }),
@@ -88,7 +88,7 @@ export const NewWishForm = ({ onClose }: { onClose?: (v: boolean) => void | unde
             showRequiredInLabel
           />
 
-          <div className="grid h-20 items-start gap-1" ref={parent}>
+          <div className="grid items-start">
             <div className="flex items-center justify-between">
               <p className="flex items-center gap-2">
                 <span className="font-semibold">Price</span>
@@ -126,19 +126,18 @@ export const NewWishForm = ({ onClose }: { onClose?: (v: boolean) => void | unde
             }}
           />
 
-          <Input<NewWishSchema>
-            register={register}
-            errors={errors}
-            displayName="description"
-            placeholder="Optional description ..."
-            rules={{
-              maxLength: {
-                value: 100,
-                message: "Must be less than 100 characters",
-              },
-            }}
-            fullHeight
-          />
+          <div className="flex gap-4">
+            <label className="flex select-none items-center gap-2 rounded-lg border border-neutral-300 px-2 py-1 text-sm font-medium">
+              <Checkbox defaultChecked={false} onCheckedChange={(v) => setValue("private", !!v)} />
+              <EyeOff size={15} />
+              Private
+            </label>
+
+            <Button variant="optional" size="sm" type="button">
+              <Tag size={15} />
+              Tags
+            </Button>
+          </div>
         </div>
 
         <div className="flex flex-col gap-4">

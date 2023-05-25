@@ -1,4 +1,4 @@
-import { type InputHTMLAttributes } from "react";
+import { type InputHTMLAttributes, type TextareaHTMLAttributes } from "react";
 import {
   type FieldErrors,
   type FieldValues,
@@ -18,6 +18,8 @@ export const Input = <I extends FieldValues>({
   showLabel = true,
   showRequiredInLabel = false,
   fullHeight = false,
+  containerClassName,
+  inputClassName,
   ...props
 }: {
   showLabel?: boolean;
@@ -28,7 +30,10 @@ export const Input = <I extends FieldValues>({
   as?: "input" | "textarea";
   showRequiredInLabel?: boolean;
   fullHeight?: boolean;
-} & Omit<InputHTMLAttributes<HTMLInputElement & HTMLTextAreaElement>, "type">) => {
+  containerClassName?: string;
+  inputClassName?: string;
+} & Omit<InputHTMLAttributes<HTMLInputElement>, "type" | "className"> &
+  Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, "className">) => {
   const Render = as;
 
   return (
@@ -36,7 +41,7 @@ export const Input = <I extends FieldValues>({
       className={cn(
         "flex flex-col gap-0.5",
         showLabel ? (fullHeight ? "h-full" : "h-20") : "h-14",
-        props.className
+        containerClassName
       )}
     >
       {showLabel && (
@@ -48,7 +53,8 @@ export const Input = <I extends FieldValues>({
       <Render
         className={cn(
           "rounded-md border bg-input px-2 py-1 transition-all duration-100 placeholder:text-neutral-400 focus:bg-input/60 focus:outline-none focus:ring-2 focus:ring-indigo-600 disabled:cursor-not-allowed disabled:border-dashed disabled:bg-transparent disabled:placeholder:text-neutral-300 dark:border-neutral-600 placeholder:dark:text-neutral-500",
-          fullHeight && "h-full"
+          fullHeight && "h-full",
+          inputClassName
         )}
         placeholder={props.placeholder || ""}
         {...(as === "textarea" && { rows: 4 })}

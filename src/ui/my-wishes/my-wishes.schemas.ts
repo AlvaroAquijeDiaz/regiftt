@@ -7,7 +7,6 @@ export const NewWishSchema = z.object({
   priceKnown: z.boolean().optional().default(false),
   price: z
     .number({
-      // TODO: Continue refining
       invalid_type_error: "Please enter a valid number",
     })
     .positive()
@@ -15,6 +14,8 @@ export const NewWishSchema = z.object({
       message: "Mmm 10M for a gift is a bit too much, don't you think?",
     })
     .optional(),
+  tags: z.array(z.string()).optional().default([]),
+  private: z.boolean().default(false),
 });
 
 export type NewWishSchema = z.infer<typeof NewWishSchema>;
@@ -22,6 +23,7 @@ export type NewWishSchema = z.infer<typeof NewWishSchema>;
 export const newListSchema = z.object({
   name: z.string().min(1).max(100),
   description: z.string().max(1000).optional(),
+  wishIDs: z.array(z.string()).optional().default([]),
 });
 
 export type NewListSchema = z.infer<typeof newListSchema>;

@@ -25,8 +25,8 @@ export const Preview = ({ metatags }: { metatags: SWRResponse<MetatagsResponse> 
   }
 
   return (
-    <div className="inline-flex h-full w-full flex-col items-center gap-2 overflow-hidden rounded-lg border bg-input text-center text-sm">
-      <div className="flex h-36 flex-col justify-center overflow-hidden">
+    <div className="inline-flex h-full max-h-full w-full flex-col items-center gap-2 overflow-hidden rounded-lg border bg-input text-center text-sm">
+      <div className="flex h-[136px] max-h-[140px] flex-col justify-center overflow-hidden">
         {!metatags.data.image ? (
           <svg>
             <rect width="100%" height="100%" fill="#ddd" />

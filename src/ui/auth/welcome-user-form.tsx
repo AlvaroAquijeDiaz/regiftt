@@ -7,12 +7,17 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { fetcher } from "~/lib/fetcher";
 import { newUserSchema, type NewUserSchema } from "~/ui/profile/profile.schemas";
+import { Input } from "../shared/input";
 
 export const WelcomeUserForm = () => {
   const session = useSession();
   const router = useRouter();
 
-  const { handleSubmit, register, formState } = useForm<NewUserSchema>({
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<NewUserSchema>({
     resolver: zodResolver(newUserSchema),
   });
 
@@ -39,13 +44,12 @@ export const WelcomeUserForm = () => {
         {session.data && (
           <input type="text" hidden {...register("userId", { value: session.data.user.id })} />
         )}
-
-        <label htmlFor="username">Username</label>
-        <input className="bg-neutral-700" {...register("username")} />
-
-        {formState.errors.username && (
-          <span className="text-red-400">{formState.errors.username.message}</span>
-        )}
+        <Input<NewUserSchema>
+          register={register}
+          displayName="username"
+          placeholder="Username"
+          errors={errors}
+        />
 
         <input type="submit" />
       </form>
