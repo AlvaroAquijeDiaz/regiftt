@@ -66,7 +66,7 @@ export const DetailsForm = () => {
           displayName="name"
           errors={errors}
           register={register}
-          className="flex-row items-center justify-between"
+          inputClassName="flex-row items-center justify-between"
         />
       )}
 
@@ -79,7 +79,7 @@ export const DetailsForm = () => {
           displayName="username"
           errors={errors}
           register={register}
-          className="flex-row items-center justify-between"
+          inputClassName="flex-row items-center justify-between"
         />
       )}
 
@@ -92,17 +92,16 @@ export const DetailsForm = () => {
           displayName="bio"
           errors={errors}
           register={register}
-          className="flex-row justify-between"
+          inputClassName="flex-row justify-between"
           as="textarea"
+          rows={2}
         />
       )}
 
-      <span>
-        <Button type="submit" disabled={isSubmitting}>
-          {isSubmitting && <Spinner />}
-          {!isSubmitting && "Save"}
-        </Button>
-      </span>
+      <Button type="submit" disabled={isSubmitting} className="mt-4">
+        {isSubmitting && <Spinner />}
+        {!isSubmitting && "Save"}
+      </Button>
     </form>
   );
 };
