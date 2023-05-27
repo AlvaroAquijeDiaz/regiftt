@@ -1,23 +1,15 @@
 import { Suspense } from "react";
-import { db } from "~/server/db";
-import { SignOut } from "~/ui/auth/sign-out";
-import { ThemeToggle } from "~/ui/theme/theme-toggle";
+import { LatestWishes } from "~/ui/home/latest";
+import { Spinner } from "~/ui/shared/spinner";
 
-export default async function Home() {
-  const users = await db.user.findMany();
-
+export default function Home() {
   return (
-    <div>
-      <h1>Home</h1>
+    <div className="flex flex-col gap-8">
+      <h1 className="mt-4 text-3xl font-black">Latest - Trending</h1>
 
-      <pre className="whitespace-pre-wrap">{JSON.stringify(users)}</pre>
-
-      <Suspense fallback={<></>}>
-        <ThemeToggle />
-      </Suspense>
-
-      <Suspense fallback={<></>}>
-        <SignOut />
+      <Suspense fallback={<Spinner />}>
+        {/* @ts-expect-error RSC */}
+        <LatestWishes />
       </Suspense>
     </div>
   );
