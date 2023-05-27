@@ -83,7 +83,8 @@
 
 @layer base {
   * {
-    @apply border-border;
+    /* TODO: Fix this ring and focus stuff */
+    @apply border-border focus-within:ring-0 focus:rounded-md focus:outline-none focus-visible:outline-none focus-visible:ring-0;
   }
 
   body {

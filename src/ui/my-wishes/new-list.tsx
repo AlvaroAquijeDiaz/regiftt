@@ -1,6 +1,6 @@
 "use client";
 
-import { Plus } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useRef, useState } from "react";
 import { Button } from "../shared/button";
@@ -40,14 +40,16 @@ export const NewListOrGift = () => {
 
   return (
     <Dropdown open={dropdownOpen} onOpenChange={setDropdownOpen}>
-      <DropdownTrigger asChild>
-        <Button className="gap-2" ref={dropdownTriggerRef}>
-          <Plus size={17} />
+      <DropdownTrigger asChild className="mx-4 w-full">
+        <Button className="justify-between gap-2 pl-4" size="sm" ref={dropdownTriggerRef}>
           Add New
+          <ChevronRight size={17} />
         </Button>
       </DropdownTrigger>
 
       <DropdownContent
+        side="right"
+        align="start"
         hidden={hasOpenDialog}
         onCloseAutoFocus={(evt) => {
           if (focusRef.current) {

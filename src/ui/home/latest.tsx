@@ -17,7 +17,7 @@ export const LatestWishes = async () => {
   const gifts = await getLatestGifts();
 
   return (
-    <section className="grid grid-cols-1 gap-4 md:grid-cols-2">
+    <section className="grid grid-cols-1 gap-8 md:grid-cols-2">
       {gifts.map((gift) => (
         <WishCard key={gift.id} wish={gift} />
       ))}

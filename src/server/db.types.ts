@@ -1,8 +1,9 @@
-import type { ColumnType } from "kysely";
+import type { ColumnType, GeneratedAlways } from "kysely";
 export type Generated<T> = T extends ColumnType<infer S, infer I, infer U>
   ? ColumnType<S, I | undefined, U>
   : ColumnType<T, T | undefined, T>;
 export type Timestamp = ColumnType<Date, Date | string, Date | string>;
+
 export type Account = {
   id: string;
   userId: string;
@@ -27,6 +28,7 @@ export type Gift = {
   slug: string;
   visible: Generated<number>;
   selected: Generated<number>;
+  sharableURL: Generated<string>;
   ownerId: string | null;
   selectedByUserId: string | null;
   createdAt: Generated<Timestamp>;
@@ -43,6 +45,7 @@ export type List = {
   image: string | null;
   dueOn: Generated<Timestamp>;
   visible: Generated<number>;
+  sharableURL: Generated<string>;
   ownerId: string | null;
   createdAt: Generated<Timestamp>;
   updatedAt: Timestamp;

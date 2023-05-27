@@ -44,7 +44,7 @@ export const withRouteMiddleware = <T, V extends ZodRawShape>(
           JSON.stringify({
             error: parsed.error,
           }),
-          { status: 405 }
+          { status: 422 }
         );
       }
 

@@ -1,7 +1,8 @@
-import { Cog, LayoutDashboard, Paintbrush, User } from "lucide-react";
+import { ChevronDown, Cog, LayoutDashboard, Paintbrush, User } from "lucide-react";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
+import { authOptions } from "~/server/auth";
 import { SignOut } from "../auth/sign-out";
 import {
   Dropdown,
@@ -16,27 +17,33 @@ import {
 import { SwitcherItems } from "../theme/theme-toggle";
 
 export const NavDropdown = async () => {
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
 
   return (
     <Dropdown>
-      <DropdownTrigger asChild className="cursor-pointer select-none hover:opacity-75">
-        {session?.user.image ? (
-          <Image
-            src={session?.user.image}
-            alt={session?.user.name || "User Profile Picture"}
-            className="rounded-full"
-            width={35}
-            height={35}
-            priority={true}
-          />
-        ) : (
-          <LayoutDashboard size={25} />
-        )}
+      <DropdownTrigger asChild className="w-full cursor-pointer select-none text-sm">
+        <p className="flex items-center justify-between">
+          {session?.user.image ? (
+            <Image
+              src={session?.user.image}
+              alt={session?.user.name || "User Profile Picture"}
+              className="rounded-full"
+              width={30}
+              height={30}
+              priority={true}
+            />
+          ) : (
+            <LayoutDashboard size={25} />
+          )}
+
+          <span className="text-sm font-bold">{session?.user.username ?? "Regiftt"}</span>
+
+          <ChevronDown size={15} />
+        </p>
       </DropdownTrigger>
 
-      <DropdownContent>
-        <DropdownLabel>My Account</DropdownLabel>
+      <DropdownContent sideOffset={10} className="w-56">
+        <DropdownLabel className="text-sm text-neutral-300">My Account</DropdownLabel>
 
         <Link href="/profile">
           <DropdownItem>
@@ -56,7 +63,7 @@ export const NavDropdown = async () => {
             Theme
           </DropdownSubTrigger>
 
-          <DropdownSubContent sideOffset={5}>
+          <DropdownSubContent sideOffset={10}>
             <SwitcherItems />
           </DropdownSubContent>
         </DropdownSub>
