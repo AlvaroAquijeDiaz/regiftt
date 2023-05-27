@@ -4,7 +4,7 @@ import { authOptions } from "~/server/auth";
 import { db } from "~/server/db";
 
 export async function DELETE(
-  req: Request,
+  _req: Request,
   {
     params,
   }: {

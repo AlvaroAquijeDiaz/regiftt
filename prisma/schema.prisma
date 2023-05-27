@@ -29,6 +29,7 @@ model Gift {
     slug        String  @unique
     visible     Boolean @default(true)
     selected    Boolean @default(false)
+    sharableURL String  @default("")
 
     owner            User?   @relation(fields: [ownerId], references: [id], name: "allMyGifts")
     ownerId          String?
@@ -51,6 +52,7 @@ model List {
     image       String?
     dueOn       DateTime @default(now())
     visible     Boolean  @default(true)
+    sharableURL String   @default("")
 
     owner   User?          @relation(fields: [ownerId], references: [id])
     ownerId String?
