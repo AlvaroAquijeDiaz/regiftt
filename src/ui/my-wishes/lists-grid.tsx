@@ -25,8 +25,6 @@ export const ListsGrid = () => {
           <h3>{list.name}</h3>
         </article>
       ))}
-
-      <p>{JSON.stringify(data)}</p>
     </section>
   );
 };

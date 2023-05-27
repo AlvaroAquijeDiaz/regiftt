@@ -21,7 +21,7 @@ export const WishesGrid = () => {
   }
 
   return (
-    <section className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3">
+    <section className="grid w-full grid-cols-1 gap-4 sm:gap-8 md:grid-cols-2">
       {all.data.map((gift) => {
         return <WishCard key={gift.id} wish={gift} />;
       })}
