@@ -16,16 +16,11 @@ import { fontSans } from "~/lib/fonts";
 import { NextAuthProvider } from "~/providers/next-auth";
 import { ThemeProvider } from "~/providers/themes";
 import "~/styles/globals.css";
-import { StyleSwitcher } from "~/ui/theme/style-switcher";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <meta charSet="UTF-8" />
-      </head>
-
-      <body className={cn("font-sans antialiased", fontSans.variable)}>
+      <body className={cn("mih-h-screen font-sans antialiased", fontSans.variable)}>
         <ThemeProvider attribute="class" defaultTheme="light">
           <NextAuthProvider>{children}</NextAuthProvider>
         </ThemeProvider>
@@ -41,8 +36,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             },
           }}
         />
-
-        <StyleSwitcher />
       </body>
     </html>
   );
