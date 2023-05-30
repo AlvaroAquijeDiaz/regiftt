@@ -12,8 +12,7 @@ export default function PageByUsername({
 }) {
   return (
     <div>
-      <h1>Page By Username</h1>
-      <p>{username}</p>
+      <h1 className="text-3xl font-black">@{username}</h1>
 
       <Suspense fallback={<Loader />}>
         {/* @ts-expect-error RSC */}
