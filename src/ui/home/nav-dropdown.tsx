@@ -42,7 +42,7 @@ export const NavDropdown = async () => {
         </p>
       </DropdownTrigger>
 
-      <DropdownContent sideOffset={10} className="w-56">
+      <DropdownContent sideOffset={10} className="w-[270px]">
         <DropdownLabel className="text-sm text-neutral-300">My Account</DropdownLabel>
 
         <Link href="/profile">

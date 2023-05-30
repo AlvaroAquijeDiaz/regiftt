@@ -1,5 +1,5 @@
 import { db } from "~/server/db";
-import { WishCard } from "~/ui/my-wishes/wish-card";
+import { WishProductCard } from "./wish-product-card";
 
 const getLatestGifts = async () => {
   return await db.gift.findMany({
@@ -10,6 +10,25 @@ const getLatestGifts = async () => {
     where: {
       visible: true,
     },
+    select: {
+      id: true,
+      name: true,
+      description: true,
+      price: true,
+      link: true,
+      sharableURL: true,
+      owner: {
+        select: {
+          username: true,
+          image: true,
+        },
+      },
+      ownerId: true,
+      image: true,
+      slug: true,
+      updatedAt: true,
+      selected: true,
+    },
   });
 };
 
@@ -17,9 +36,9 @@ export const LatestWishes = async () => {
   const gifts = await getLatestGifts();
 
   return (
-    <section className="grid grid-cols-1 gap-8 md:grid-cols-2">
+    <section className="grid grid-cols-1 gap-8">
       {gifts.map((gift) => (
-        <WishCard key={gift.id} wish={gift} />
+        <WishProductCard key={gift.id} wish={gift} />
       ))}
     </section>
   );

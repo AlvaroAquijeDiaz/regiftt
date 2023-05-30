@@ -22,9 +22,9 @@ export const getIcon = (
   }
 
   switch (name) {
-    case "Wishes":
+    case "My Wishes":
       return Stars;
-    case "Lists":
+    case "My Lists":
       return TreePineIcon;
     case "Giving Away":
       return HeartHandshake;
@@ -48,7 +48,7 @@ export const SidebarSegment = ({ segment }: { segment: (typeof segments)[number]
   return (
     <li
       className={cn(
-        "flex items-center gap-3 rounded-md p-2 font-semibold transition-all duration-100 hover:bg-neutral-200/80 hover:text-black",
+        "flex items-center gap-3 rounded-lg p-2 font-semibold transition-all duration-100 hover:bg-neutral-200/80 hover:text-black",
         isCurrentSegmentSelected
           ? "bg-neutral-200/80 text-black"
           : "bg-transparent text-neutral-600"

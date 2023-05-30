@@ -3,7 +3,12 @@ import { type MetatagsResponse } from "~/app/api/metatags/route";
 import { getDomainWithoutWWW, truncate } from "~/lib/utils";
 import { Spinner } from "~/ui/shared/spinner";
 
-export const Preview = ({ metatags }: { metatags: SWRResponse<MetatagsResponse> }) => {
+export const Preview = ({
+  metatags,
+}: {
+  metatags: SWRResponse<MetatagsResponse>;
+  url?: string;
+}) => {
   if (metatags.isLoading) {
     return (
       <div className="flex h-full flex-col justify-center gap-4">

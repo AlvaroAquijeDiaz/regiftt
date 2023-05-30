@@ -4,7 +4,6 @@ import { ChevronRight } from "lucide-react";
 import { useSelectedLayoutSegments } from "next/navigation";
 import { cn } from "~/lib/cn";
 import { type segments } from ".";
-import { Button } from "../../shared/button";
 import { getIcon } from "./sidebar-segment";
 
 export const SelectedSegments = () => {
@@ -14,8 +13,8 @@ export const SelectedSegments = () => {
 
   return (
     <li>
-      <Button variant="ghost" className="gap-4 font-semibold capitalize hover:bg-transparent">
-        <Icon size={20} />
+      <div className="flex items-center gap-4 py-2 text-sm font-semibold capitalize hover:bg-transparent">
+        <Icon size={20} className="fill-indigo-500 text-indigo-500" />
 
         <p className="flex items-center gap-2">
           {route.join("").includes("home")
@@ -31,7 +30,7 @@ export const SelectedSegments = () => {
                 </span>
               ))}
         </p>
-      </Button>
+      </div>
     </li>
   );
 };

@@ -41,7 +41,11 @@ export const NewListOrGift = () => {
   return (
     <Dropdown open={dropdownOpen} onOpenChange={setDropdownOpen}>
       <DropdownTrigger asChild className="mx-4 w-full">
-        <Button className="justify-between gap-2 pl-4" size="sm" ref={dropdownTriggerRef}>
+        <Button
+          className="justify-between gap-2 rounded-lg pl-4"
+          size="sm"
+          ref={dropdownTriggerRef}
+        >
           Add New
           <ChevronRight size={17} />
         </Button>
