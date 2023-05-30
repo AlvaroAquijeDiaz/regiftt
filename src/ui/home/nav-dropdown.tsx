@@ -1,8 +1,6 @@
-import { ChevronDown, Cog, LayoutDashboard, Paintbrush, User } from "lucide-react";
-import { getServerSession } from "next-auth";
-import Image from "next/image";
+import { Cog, Paintbrush, UserIcon } from "lucide-react";
 import Link from "next/link";
-import { authOptions } from "~/server/auth";
+import { Suspense } from "react";
 import { SignOut } from "../auth/sign-out";
 import {
   Dropdown,
@@ -12,42 +10,24 @@ import {
   DropdownSub,
   DropdownSubContent,
   DropdownSubTrigger,
-  DropdownTrigger,
 } from "../shared/dropdown";
+import { Spinner } from "../shared/spinner";
 import { SwitcherItems } from "../theme/theme-toggle";
+import { UserDropdown } from "./user-dropdown";
 
-export const NavDropdown = async () => {
-  const session = await getServerSession(authOptions);
-
+export const NavDropdown = () => {
   return (
     <Dropdown>
-      <DropdownTrigger asChild className="w-full cursor-pointer select-none text-sm">
-        <p className="flex items-center justify-between">
-          {session?.user.image ? (
-            <Image
-              src={session?.user.image}
-              alt={session?.user.name || "User Profile Picture"}
-              className="rounded-full"
-              width={30}
-              height={30}
-              priority={true}
-            />
-          ) : (
-            <LayoutDashboard size={25} />
-          )}
-
-          <span className="text-sm font-bold">{session?.user.username ?? "Regiftt"}</span>
-
-          <ChevronDown size={15} />
-        </p>
-      </DropdownTrigger>
+      <Suspense fallback={<Spinner />}>
+        <UserDropdown />
+      </Suspense>
 
       <DropdownContent sideOffset={10} className="w-[270px]">
         <DropdownLabel className="text-sm text-neutral-300">My Account</DropdownLabel>
 
         <Link href="/profile">
           <DropdownItem>
-            <User size={16} />
+            <UserIcon size={16} />
             Profile
           </DropdownItem>
         </Link>
@@ -68,7 +48,7 @@ export const NavDropdown = async () => {
           </DropdownSubContent>
         </DropdownSub>
 
-        <DropdownItem>
+        <DropdownItem asChild>
           <SignOut />
         </DropdownItem>
       </DropdownContent>

@@ -10,7 +10,7 @@ export const Return = () => {
     <Button
       size="sm"
       variant="link"
-      className="px-0 text-neutral-500"
+      className="mb-4 px-0 text-neutral-500"
       onClick={router.back.bind(router)}
     >
       <ChevronLeft size={15} />

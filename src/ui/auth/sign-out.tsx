@@ -10,14 +10,16 @@ export const SignOut = () => {
   const handleSignOut = async () => {
     const data = await signOut({
       redirect: false,
-      callbackUrl: "/",
     });
 
     router.push(data.url);
   };
 
   return (
-    <span onClick={() => void handleSignOut()} className="flex items-center gap-2">
+    <span
+      onClick={() => void handleSignOut()}
+      className="flex items-center gap-2 rounded p-1.5 text-sm hover:bg-neutral-600"
+    >
       <LogOut size={16} />
       Sign Out
     </span>

@@ -54,7 +54,7 @@ export const DetailsForm = () => {
 
   return (
     <form
-      className="flex max-w-sm flex-col py-8"
+      className="flex max-w-sm flex-col gap-6 py-8"
       onSubmit={(evt) => void handleSubmit(onSubmit)(evt)}
     >
       {!user ? (

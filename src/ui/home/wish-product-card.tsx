@@ -7,21 +7,25 @@ export const WishProductCard = ({
   wish,
 }: {
   wish: Omit<Gift, "createdAt" | "visible" | "selectedByUserId"> & {
-    owner: {
+    owner?: {
       username: string | null;
       image: string | null;
     } | null;
+    viewerIsOwner?: boolean;
+    createdAt?: Date;
+    visible?: boolean;
+    selectedByUserId?: string | null;
   };
 }) => {
   return (
     <article
       className={cn(
-        "flex max-w-full flex-col gap-4 overflow-hidden rounded-2xl bg-white bg-gradient-to-br shadow-lg",
+        "flex max-w-full flex-col gap-4 overflow-hidden rounded-xl border bg-white bg-gradient-to-br shadow-lg",
         wish.image ? "pb-6" : "py-6"
       )}
     >
       {wish.image && (
-        <div className="pattern-isometric max-h-[400px] overflow-hidden pattern-neutral-100 pattern-opacity-100">
+        <div className="pattern-isometric max-h-[400px] overflow-hidden pattern-neutral-100 pattern-opacity-100 pattern-size-6">
           <Image
             src={wish.image}
             width={800}
@@ -46,30 +50,32 @@ export const WishProductCard = ({
           )}
 
           <div className="flex flex-col">
-            <Link href={`/${wish.owner?.username || ""}` as LinkProps["href"]}>
-              <p className="text-sm font-[500] text-neutral-500 underline-offset-1 hover:underline">
-                @{wish.owner?.username}
-              </p>
-            </Link>
-
             <Link
               href={`/${wish.owner?.username || ""}/wishes/${wish.slug}` as LinkProps["href"]}
               passHref
             >
               <h3 className="font-bold capitalize md:text-lg">{wish.name}</h3>
             </Link>
+
+            <Link href={`/${wish.owner?.username || ""}` as LinkProps["href"]}>
+              <p className="text-sm font-[500] text-neutral-500 underline-offset-1 hover:underline">
+                @{wish.owner?.username} on {wish.updatedAt?.toLocaleString()}
+              </p>
+            </Link>
           </div>
         </div>
 
-        <div className="flex flex-col gap-2">
-          <p className="text-neutral-600">{wish.description || "No Description Provided"}</p>
+        <Link href={`/${wish.owner?.username || ""}/wishes/${wish.slug}` as LinkProps["href"]}>
+          <div className="flex flex-col gap-2">
+            <p className="text-neutral-600">{wish.description || "No Description Provided"}</p>
 
-          {wish.price && <p className="text-sm font-bold">${wish.price}</p>}
+            {wish.price && <p className="text-sm font-bold">${wish.price}</p>}
 
-          <p>{wish.link} - Link Previews are coming!</p>
+            <p>{wish.link} - Link Previews are coming!</p>
 
-          <p>{wish.sharableURL}</p>
-        </div>
+            <p>{wish.sharableURL}</p>
+          </div>
+        </Link>
 
         <div>Selected ?</div>
       </section>

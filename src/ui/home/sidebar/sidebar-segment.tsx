@@ -1,5 +1,5 @@
 "use client";
-import { HeartHandshake, Stars, TreePineIcon, TrendingUp } from "lucide-react";
+import { HeartHandshake, Stars, TreePineIcon, TrendingUp, UserCircle2 } from "lucide-react";
 import { useSelectedLayoutSegment, useSelectedLayoutSegments } from "next/navigation";
 import { cn } from "~/lib/cn";
 import { type segments } from ".";
@@ -16,8 +16,10 @@ export const getIcon = (
         return TreePineIcon;
       case "/dashboard/giving":
         return HeartHandshake;
-      default:
+      case "/home":
         return TrendingUp;
+      default:
+        return UserCircle2;
     }
   }
 
@@ -41,8 +43,11 @@ export const SidebarSegment = ({ segment }: { segment: (typeof segments)[number]
 
   const isCurrentSegmentSelected = isHome
     ? true
-    : routes.some((r) => r === segment.path.split("/")[2]);
-
+    : routes.some((r) => r === segment.path.split("/")[2])
+    ? routes.length > 2
+      ? false
+      : true
+    : false;
   const Icon = getIcon(segment.name);
 
   return (
