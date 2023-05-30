@@ -9,7 +9,7 @@ export default function AuthenticatedLayout({ children }: { children: React.Reac
       <div className="flex h-full w-full flex-col">
         <Nav />
 
-        <main className="mx-auto h-full w-full max-w-3xl px-4 pb-8 pt-5">{children}</main>
+        <main className="mx-auto h-full w-full max-w-2xl px-4 pb-8 pt-5">{children}</main>
       </div>
     </section>
   );
