@@ -6,12 +6,12 @@ import { type User } from "~/server/db.types";
 import { editProfileSchema, type EditProfileSchema } from "~/ui/profile/profile.schemas";
 
 export const GET = async (req: NextRequest) => {
-  const token = (await getToken({
+  const session = await getToken({
     req,
     secret: env.NEXTAUTH_SECRET,
-  })) as JWT;
+  });
 
-  if (!token) {
+  if (!session) {
     return new Response(JSON.stringify({ message: "Unauthorized" }), {
       status: 401,
     });
@@ -19,7 +19,7 @@ export const GET = async (req: NextRequest) => {
 
   const user = await db.user.findFirstOrThrow({
     where: {
-      id: token.id,
+      id: session.id,
     },
   });
 
