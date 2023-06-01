@@ -20,7 +20,7 @@ export const WishProductCard = ({
   return (
     <article
       className={cn(
-        "flex max-w-full flex-col gap-4 overflow-hidden rounded-xl border bg-white bg-gradient-to-br shadow-lg",
+        "flex max-w-full flex-col gap-4 overflow-hidden rounded-xl border bg-white shadow-lg",
         wish.image ? "pb-6" : "py-6"
       )}
     >
@@ -40,13 +40,15 @@ export const WishProductCard = ({
       <section className="flex flex-col gap-3 px-6">
         <div className="flex flex-1 items-center gap-2">
           {wish.owner?.image && (
-            <Image
-              src={wish.owner?.image}
-              height={40}
-              width={40}
-              alt={wish.owner.username || ""}
-              className="rounded-full"
-            />
+            <Link href={`/${wish.owner.username || ""}` as LinkProps["href"]}>
+              <Image
+                src={wish.owner?.image}
+                height={40}
+                width={40}
+                alt={wish.owner.username || ""}
+                className="rounded-full"
+              />
+            </Link>
           )}
 
           <div className="flex flex-col">
