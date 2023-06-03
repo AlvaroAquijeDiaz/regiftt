@@ -10,6 +10,7 @@ export const SignOut = () => {
   const handleSignOut = async () => {
     const data = await signOut({
       redirect: false,
+      callbackUrl: "/",
     });
 
     router.push(data.url);
