@@ -66,7 +66,6 @@ export default function WishIDPage({ params: { wishId } }: { params: { wishId: s
         </h1>
 
         <Suspense fallback={<Spinner />}>
-          {/* @ts-expect-error RSC */}
           <Details wishID={wishId} />
         </Suspense>
       </div>

@@ -39,8 +39,8 @@ export const WelcomeUserForm = () => {
   return (
     <div>
       <h2>New User Form</h2>
-
-      <form onSubmit={(evt) => void handleSubmit(onSubmit)(evt)} className="flex flex-col gap-2">
+      {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
         {session.data && (
           <input type="text" hidden {...register("userId", { value: session.data.user.id })} />
         )}

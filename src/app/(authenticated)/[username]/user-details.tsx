@@ -9,7 +9,7 @@ const getUserDetailsByUsername = async (username: string) => {
   });
 };
 
-export const UserDetails = async ({ username }: { username: string }) => {
+export async function UserDetails({ username }: { username: string }) {
   const user = await getUserDetailsByUsername(username);
 
   if (!user) {
@@ -26,4 +26,4 @@ export const UserDetails = async ({ username }: { username: string }) => {
       <p>{user.email}</p>
     </div>
   );
-};
+}

@@ -15,12 +15,10 @@ export default function PageByUsername({
       <h1 className="text-3xl font-black">@{username}</h1>
 
       <Suspense fallback={<Loader />}>
-        {/* @ts-expect-error RSC */}
         <UserDetails username={username} />
       </Suspense>
 
       <Suspense fallback={<Loader />}>
-        {/* @ts-expect-error RSC */}
         <GiftsByUsername username={username} />
       </Suspense>
     </div>

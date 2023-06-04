@@ -8,7 +8,6 @@ export default function Home() {
       <h1 className="text-3xl font-black">🚀 Trending</h1>
 
       <Suspense fallback={<Spinner />}>
-        {/* @ts-expect-error RSC */}
         <LatestWishes />
       </Suspense>
     </div>
