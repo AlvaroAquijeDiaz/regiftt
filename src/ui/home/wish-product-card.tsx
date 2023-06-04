@@ -40,7 +40,7 @@ export const WishProductCard = ({
       <section className="flex flex-col gap-3 px-6">
         <div className="flex flex-1 items-center gap-2">
           {wish.owner?.image && (
-            <Link href={`/${wish.owner.username || ""}` as LinkProps["href"]}>
+            <Link href={`/${wish.owner.username || ""}` as LinkProps["href"]} passHref>
               <Image
                 src={wish.owner?.image}
                 height={40}
@@ -67,7 +67,10 @@ export const WishProductCard = ({
           </div>
         </div>
 
-        <Link href={`/${wish.owner?.username || ""}/wishes/${wish.slug}` as LinkProps["href"]}>
+        <Link
+          href={`/${wish.owner?.username || ""}/wishes/${wish.slug}` as LinkProps["href"]}
+          passHref
+        >
           <div className="flex flex-col gap-2">
             <p className="text-neutral-600">{wish.description || "No Description Provided"}</p>
 
