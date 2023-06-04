@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   ],
 };
 
+import { Analytics } from "@vercel/analytics/react";
 import { type Metadata } from "next";
 import { Toaster } from "react-hot-toast";
 import { cn } from "~/lib/cn";
@@ -36,6 +37,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             },
           }}
         />
+
+        <Analytics />
       </body>
     </html>
   );
