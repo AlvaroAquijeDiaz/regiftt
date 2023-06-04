@@ -1,4 +1,5 @@
 import { db } from "~/server/db";
+import { ListProductCard } from "./list-product-card";
 import { WishProductCard } from "./wish-product-card";
 
 const getLatestGifts = async () => {
@@ -10,33 +11,58 @@ const getLatestGifts = async () => {
     where: {
       visible: true,
     },
-    select: {
-      id: true,
-      name: true,
-      description: true,
-      price: true,
-      link: true,
-      sharableURL: true,
+    include: {
       owner: {
         select: {
           username: true,
           image: true,
         },
       },
-      ownerId: true,
-      image: true,
-      slug: true,
-      updatedAt: true,
-      selected: true,
+    },
+  });
+};
+
+const getLatestLists = async () => {
+  return await db.list.findMany({
+    take: 10,
+    orderBy: {
+      updatedAt: "desc",
+    },
+    where: {
+      visible: true,
+    },
+    include: {
+      owner: {
+        select: {
+          username: true,
+          image: true,
+        },
+      },
+      _count: true,
+      gifts: {
+        select: {
+          gift: {
+            select: {
+              name: true,
+              image: true,
+            },
+          },
+        },
+      },
     },
   });
 };
 
 export const LatestWishes = async () => {
   const gifts = await getLatestGifts();
+  const lists = await getLatestLists();
 
   return (
     <section className="grid grid-cols-1 gap-8">
+      {lists.map((list) => (
+        <ListProductCard key={list.id} list={list} />
+      ))}
+
       {gifts.map((gift) => (
         <WishProductCard key={gift.id} wish={gift} />
       ))}
