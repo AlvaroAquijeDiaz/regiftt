@@ -92,3 +92,14 @@
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
+
+@layer components {
+  .mouse-follower-blob {
+    background: rgb(139, 92, 246);
+    background: radial-gradient(
+      circle,
+      rgba(139, 92, 246, 1) 0%,
+      rgba(38, 38, 38, 0.41082370448179273) 100%
+    );
+  }
+}
