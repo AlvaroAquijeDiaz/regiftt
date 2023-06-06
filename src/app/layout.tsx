@@ -18,13 +18,13 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Regiftt",
-    site: "regifttapp",
+    site: "@regiftt.app",
     description: "The new social media to share wishes and desires",
     images:
       "https://res.cloudinary.com/dplsjufzf/image/upload/v1685921448/OpenGraph_Image_r3jn1r.svg",
     creator: "@alvaro_dotdev",
   },
-  metadataBase: new URL("https://regiftt.vercel.app"),
+  metadataBase: new URL("https://regiftt.vercel.app/api/og"),
 };
 
 import { Analytics } from "@vercel/analytics/react";

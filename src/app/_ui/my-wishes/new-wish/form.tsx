@@ -39,7 +39,7 @@ export const NewWishForm = ({ onClose }: { onClose?: (v: boolean) => void | unde
     },
   });
 
-  const debouncedURL = useDebounce(watch("url"));
+  const debouncedURL = useDebounce<string | undefined>(watch("url"));
 
   const previewURL = useSWR<MetatagsResponse>(
     `/api/metatags?url=${debouncedURL || ""}`,
@@ -53,12 +53,17 @@ export const NewWishForm = ({ onClose }: { onClose?: (v: boolean) => void | unde
 
   const onSubmit = async (data: NewWishSchema) => {
     await toast.promise(
-      fetcher(`/api/wish`, {
+      fetcher<unknown, NewWishSchema>(`/api/wish`, {
         method: "POST",
         body: {
           ...data,
           price: isNaN(Number(data.price)) ? undefined : Number(data.price),
           private: data.private ? false : true,
+          linkMeta: {
+            description: previewURL?.data?.description,
+            image: previewURL?.data?.image || undefined,
+            title: previewURL?.data?.title,
+          },
         },
         isClient: true,
       }),
@@ -167,7 +172,10 @@ export const NewWishForm = ({ onClose }: { onClose?: (v: boolean) => void | unde
         </div>
       </section>
 
-      <Button type="submit" disabled={isSubmitting}>
+      <Button
+        type="submit"
+        disabled={isSubmitting || (debouncedURL && !previewURL.data ? true : false)}
+      >
         {isSubmitting && <Spinner />}
         {!isSubmitting && "Create"}
       </Button>
