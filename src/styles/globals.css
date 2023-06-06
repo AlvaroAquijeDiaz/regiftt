@@ -82,11 +82,6 @@
 }
 
 @layer base {
-  * {
-    /* TODO: Fix this ring and focus stuff */
-    @apply border-border focus-within:ring-0 focus:rounded-md focus:outline-none focus-visible:outline-none focus-visible:ring-0;
-  }
-
   body {
     @apply bg-neutral-50 text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;

@@ -6,7 +6,7 @@ import { MouseFollower } from "./_ui/mouse-follower";
 
 export default function Landing() {
   return (
-    <section className="my-auto flex min-h-full min-w-full flex-col items-center justify-between text-neutral-100">
+    <section className="flex min-h-full flex-col items-center justify-between text-neutral-100">
       <section className="z-10 flex max-w-3xl flex-col items-center gap-4">
         <header className="mb-4 flex select-none items-center  gap-4">
           <Image src="/favicon.ico" alt="Logo" width={80} height={80} />
@@ -40,11 +40,15 @@ export default function Landing() {
           </p>
         </article>
 
-        <Link href={"https://tally.so/r/w54qQb" as LinkProps["href"]} target="_blank">
+        <Link
+          href={"https://tally.so/r/w54qQb" as LinkProps["href"]}
+          target="_blank"
+          className="mt-10"
+        >
           <Button
             variant="secondary"
             size="lg"
-            className="z-20 mt-10 w-fit self-center rounded-full font-bold hover:-translate-y-1 hover:bg-white hover:shadow-lg hover:shadow-purple-700/50"
+            className="z-20 w-fit self-center rounded-full font-bold hover:-translate-y-1 hover:bg-white hover:shadow-lg hover:shadow-purple-700/50"
           >
             Join The Waitlist
             <ArrowRight size={20} />

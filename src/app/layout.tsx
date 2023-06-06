@@ -25,6 +25,7 @@ export const metadata: Metadata = {
     ],
     creator: "@alvaro_dotdev",
   },
+  metadataBase: new URL("https://regiftt.vercel.app"),
 };
 
 import { Analytics } from "@vercel/analytics/react";
@@ -39,7 +40,8 @@ import "~/styles/globals.css";
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn("mih-h-screen font-sans antialiased", fontSans.variable)}>
+      {/* TODO: Why is it overflowing when cursor is near edges? fixed by overflow-hidden but idk */}
+      <body className={cn("min-h-screen overflow-hidden font-sans antialiased", fontSans.variable)}>
         <ThemeProvider attribute="class" defaultTheme="light">
           <NextAuthProvider>{children}</NextAuthProvider>
         </ThemeProvider>
