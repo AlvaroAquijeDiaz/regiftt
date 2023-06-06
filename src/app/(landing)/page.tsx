@@ -9,8 +9,8 @@ export default function Landing() {
     <section className="my-auto flex min-h-full min-w-full flex-col items-center justify-between text-neutral-100">
       <section className="z-10 flex max-w-3xl flex-col items-center gap-4">
         <header className="mb-4 flex select-none items-center  gap-4">
-          <Image src="/favicon.ico" alt="Logo" width={100} height={100} />
-          <h1 className="text-center text-6xl font-black">Welcome to Regiftt</h1>
+          <Image src="/favicon.ico" alt="Logo" width={80} height={80} />
+          <h1 className="text-center text-4xl font-black md:text-6xl">Welcome to Regiftt</h1>
         </header>
 
         <article className="flex w-fit max-w-[50ch] select-none flex-col gap-2 self-center rounded-md border-neutral-600 p-4">
