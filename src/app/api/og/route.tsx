@@ -1,11 +1,9 @@
 import { ImageResponse } from "next/server";
 
-export const config = {
-  runtime: "edge",
-};
+export const runtime = "edge";
 
 export function GET() {
-  const image = (
+  const Image = (
     // eslint-disable-next-line @next/next/no-img-element
     <img
       src="https://res.cloudinary.com/dplsjufzf/image/upload/v1685921448/OpenGraph_Image_r3jn1r.svg"
@@ -24,7 +22,7 @@ export function GET() {
           display: "flex",
         }}
       >
-        {image}
+        {Image}
       </div>
     ),
     {

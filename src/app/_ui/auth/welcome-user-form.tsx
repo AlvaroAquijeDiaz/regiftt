@@ -15,6 +15,7 @@ export const WelcomeUserForm = () => {
   const router = useRouter();
 
   const {
+    // @typescript-eslint/no-misused-promises
     handleSubmit,
     register,
     formState: { errors },
@@ -39,8 +40,7 @@ export const WelcomeUserForm = () => {
 
   return (
     <div className="flex w-full flex-col items-center gap-2">
-      {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
-      <form onSubmit={handleSubmit(onSubmit)} className="flex w-1/2 flex-col gap-2">
+      <form onSubmit={void handleSubmit(onSubmit)} className="flex w-1/2 flex-col gap-2">
         {session.data && (
           <input type="text" hidden {...register("userId", { value: session.data.user.id })} />
         )}

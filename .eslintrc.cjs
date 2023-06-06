@@ -27,6 +27,8 @@ const config = {
       },
     ],
     "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
+    "@typescript-eslint/no-misused-promises": ["warn"],
+    "@typescript-eslint/unbound-method": ["warn"],
     "no-console": "warn",
   },
 };
