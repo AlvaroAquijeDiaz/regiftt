@@ -41,7 +41,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       {/* TODO: Why is it overflowing when cursor is near edges? fixed by overflow-hidden but idk */}
-      <body className={cn("min-h-screen overflow-hidden font-sans antialiased", fontSans.variable)}>
+      <body className={cn("min-h-screen font-sans antialiased", fontSans.variable)}>
         <ThemeProvider attribute="class" defaultTheme="light">
           <NextAuthProvider>{children}</NextAuthProvider>
         </ThemeProvider>

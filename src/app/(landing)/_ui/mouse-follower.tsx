@@ -31,7 +31,7 @@ export const MouseFollower = () => {
       <div
         ref={ref}
         className={clsx(
-          "pointer-events-none absolute left-0 top-0 z-0 h-64 w-64 rounded-full opacity-10 blur-xl",
+          "pointer-events-none fixed left-0 top-0 z-0 h-64 w-64 rounded-full opacity-10 blur-xl",
           "mouse-follower-blob"
         )}
       />
