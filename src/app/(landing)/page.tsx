@@ -1,4 +1,6 @@
+import { ArrowRight } from "lucide-react";
 import Image from "next/image";
+import Link, { type LinkProps } from "next/link";
 import { Button } from "~/ui/shared/button";
 import { MouseFollower } from "./_ui/mouse-follower";
 
@@ -38,13 +40,16 @@ export default function Landing() {
           </p>
         </article>
 
-        <Button
-          variant="secondary"
-          size="lg"
-          className="mt-10 w-fit self-center rounded-full font-bold"
-        >
-          Join The Waitlist
-        </Button>
+        <Link href={"https://tally.so/r/w54qQb" as LinkProps["href"]} target="_blank">
+          <Button
+            variant="secondary"
+            size="lg"
+            className="z-20 mt-10 w-fit self-center rounded-full font-bold hover:-translate-y-1 hover:bg-white hover:shadow-lg hover:shadow-purple-700/50"
+          >
+            Join The Waitlist
+            <ArrowRight size={20} />
+          </Button>
+        </Link>
       </section>
 
       <MouseFollower />

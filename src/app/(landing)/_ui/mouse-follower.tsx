@@ -27,7 +27,7 @@ export const MouseFollower = () => {
   }, [tabActive]);
 
   return (
-    <div>
+    <div className="z-0">
       <div
         ref={ref}
         className={clsx(
