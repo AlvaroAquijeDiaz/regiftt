@@ -8,7 +8,7 @@ export function GET(req: Request) {
   const Image = (
     // eslint-disable-next-line @next/next/no-img-element
     <img
-      src={`${url.origin}/og/OpenGraph.svg`}
+      src={`${url.origin}/og/regiftt.png`}
       alt="OG"
       className="rounded-md bg-neutral-800"
       width={1200}
