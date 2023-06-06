@@ -16,8 +16,8 @@ export default function Landing() {
         <article className="flex w-fit max-w-[50ch] select-none flex-col gap-2 self-center rounded-md border-neutral-600 p-4">
           <p className="font-bold">Have you ever received a gift that you didn&apos;t want?</p>
           <p className="text-neutral-400">
-            Maybe it was a duplicate of something you already had, or something you just didn&apos;t
-            didn&apos;t like.
+            Maybe it was a duplicate of something you already had, or you just didn&apos;t
+            didn&apos;t like it at all.
           </p>
         </article>
 
