@@ -1,6 +1,7 @@
 export const metadata: Metadata = {
   title: "Regiftt",
   description: "The new social media to share wishes and desires",
+  viewport: "width=device-width",
   authors: [
     {
       name: "Alvaro Aquije",
@@ -8,21 +9,22 @@ export const metadata: Metadata = {
     },
   ],
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "Regiftt",
-    site: "@regiftt.app",
+    site: "@alvaro_dotdev",
     description: "The new social media to share wishes and desires",
-    images: "https://regiftt.vercel.app/api/og",
+    images: "https://regiftt.vercel.app/og/regiftt.png",
     creator: "@alvaro_dotdev",
   },
   openGraph: {
     url: "https://regiftt.vercel.app",
     title: "Regiftt",
     description: "The new social media to share wishes and desires",
-    images: "https://regiftt.vercel.app/api/og",
-    type: "website",
+    images: "https://regiftt.vercel.app/og/regiftt.png",
   },
+  icons: "https://regiftt.vercel.app/favicon.ico",
   metadataBase: new URL("https://regiftt.vercel.app/api/og"),
+  generator: "Regiftt v0.0.1",
 };
 
 import { Analytics } from "@vercel/analytics/react";
@@ -37,6 +39,9 @@ import "~/styles/globals.css";
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="cannonical" href="https://regiftt.vercel.app" />
+      </head>
       {/* TODO: Why is it overflowing when cursor is near edges? fixed by overflow-hidden but idk */}
       <body className={cn("min-h-screen font-sans antialiased", fontSans.variable)}>
         <ThemeProvider attribute="class" defaultTheme="light">
