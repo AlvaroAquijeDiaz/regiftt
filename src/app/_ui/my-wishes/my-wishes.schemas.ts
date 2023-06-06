@@ -24,6 +24,7 @@ export const newListSchema = z.object({
   name: z.string().min(1).max(100),
   description: z.string().max(1000).optional(),
   wishIDs: z.array(z.string()).optional().default([]),
+  private: z.boolean().default(false),
 });
 
 export type NewListSchema = z.infer<typeof newListSchema>;

@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { newUserSchema, type NewUserSchema } from "~/app/_ui/profile/profile.schemas";
 import { fetcher } from "~/lib/fetcher";
+import { Button } from "../shared/button";
 import { Input } from "../shared/input";
 
 export const WelcomeUserForm = () => {
@@ -37,21 +38,20 @@ export const WelcomeUserForm = () => {
   };
 
   return (
-    <div>
-      <h2>New User Form</h2>
+    <div className="flex w-full flex-col items-center gap-2">
       {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
+      <form onSubmit={handleSubmit(onSubmit)} className="flex w-1/2 flex-col gap-2">
         {session.data && (
           <input type="text" hidden {...register("userId", { value: session.data.user.id })} />
         )}
         <Input<NewUserSchema>
           register={register}
           displayName="username"
-          placeholder="Username"
+          placeholder="@mr-beast"
           errors={errors}
         />
 
-        <input type="submit" />
+        <Button>Save</Button>
       </form>
     </div>
   );

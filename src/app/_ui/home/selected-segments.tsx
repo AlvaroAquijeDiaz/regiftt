@@ -15,10 +15,10 @@ export const SelectedSegments = () => {
   const Icon = getIcon(undefined, ("/" + route.join("/")) as (typeof segments)[number]["path"]);
 
   return (
-    <li className="flex items-center gap-1">
+    <li className="flex items-center gap-2">
       {path === "home" ? null : (
         <Button onClick={r.back.bind(r)} size="sm" variant="ghost" className="h-7 w-7 px-1">
-          <ArrowLeft size={20} className="text-indigo-700" />
+          <ArrowLeft size={20} className="text-neutral-600" />
         </Button>
       )}
 

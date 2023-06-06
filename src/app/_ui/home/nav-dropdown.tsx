@@ -48,9 +48,7 @@ export const NavDropdown = () => {
           </DropdownSubContent>
         </DropdownSub>
 
-        <DropdownItem asChild>
-          <SignOut />
-        </DropdownItem>
+        <SignOut />
       </DropdownContent>
     </Dropdown>
   );

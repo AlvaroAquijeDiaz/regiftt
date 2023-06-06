@@ -4,12 +4,12 @@ import * as React from "react";
 import { cn } from "~/lib/cn";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center rounded-full text-sm font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background select-none gap-1",
+  "inline-flex items-center justify-center rounded-full text-sm font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background select-none gap-2",
   {
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground active:outline-none hover:bg-primary/90 active:scale-95 transition-all duration-100",
+          "bg-primary text-primary-foreground active:outline-none hover:bg-primary/90 active:scale-95 transition-all duration-100 text-neutral-200",
         destructive:
           "bg-red-700 dark:bg-red-900 text-destructive-foreground hover:bg-red-700/90 dark:hover:bg-red-900/90 active:scale-95 transition-all duration-100",
         outline:
@@ -23,7 +23,7 @@ const buttonVariants = cva(
       },
       size: {
         default: "h-10 py-2 px-4",
-        sm: "h-8 px-3",
+        sm: "h-8 px-4",
         lg: "h-11 px-8 rounded-md",
       },
     },

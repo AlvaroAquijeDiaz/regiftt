@@ -1,4 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { EyeOff } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import useSWR, { useSWRConfig } from "swr";
@@ -15,6 +17,7 @@ import { newListSchema, type NewListSchema } from "../my-wishes.schemas";
 
 export const NewListForm = ({ onClose }: { onClose?: (b: boolean) => void }) => {
   const { mutate } = useSWRConfig();
+  const r = useRouter();
 
   const {
     register,
@@ -26,6 +29,7 @@ export const NewListForm = ({ onClose }: { onClose?: (b: boolean) => void }) => 
     resolver: zodResolver(newListSchema),
     defaultValues: {
       wishIDs: [],
+      private: false,
     },
   });
 
@@ -49,6 +53,7 @@ export const NewListForm = ({ onClose }: { onClose?: (b: boolean) => void }) => 
 
     await mutate("/api/list");
     onClose && onClose(false);
+    r.push("/dashboard/lists");
   };
 
   return (
@@ -110,6 +115,12 @@ export const NewListForm = ({ onClose }: { onClose?: (b: boolean) => void }) => 
           ))}
         </ScrollArea>
       </div>
+
+      <label className="mt-2 flex w-fit select-none items-center gap-2 rounded-lg border border-neutral-300 px-2 py-1 text-sm font-medium">
+        <Checkbox defaultChecked={false} onCheckedChange={(v) => setValue("private", !!v)} />
+        <EyeOff size={15} />
+        Private
+      </label>
 
       {errors.wishIDs?.message}
 

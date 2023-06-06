@@ -1,5 +1,5 @@
 import { type List } from "@prisma/client/edge";
-import { ImageIcon } from "lucide-react";
+import { CircleSlash2, ImageIcon } from "lucide-react";
 import Image from "next/image";
 import Link, { type LinkProps } from "next/link";
 
@@ -23,7 +23,7 @@ export const ListProductCard = ({
   };
 }) => {
   return (
-    <article className="flex flex-col overflow-hidden rounded-lg shadow-lg transition-all duration-150">
+    <article className="flex flex-col overflow-hidden rounded-lg border shadow-lg transition-all duration-150">
       <div className="flex-shrink-0">
         {list.image && (
           <Image
@@ -38,7 +38,7 @@ export const ListProductCard = ({
 
       <div className="flex flex-1 flex-col justify-between bg-white p-6">
         <Link
-          href={`/${list.owner?.username || ""}/lists/${list.id}` as LinkProps["href"]}
+          href={`/${list.owner?.username || ""}/lists/${list.slug}` as LinkProps["href"]}
           passHref
         >
           <div className="flex-1">
@@ -49,6 +49,13 @@ export const ListProductCard = ({
 
         <section className="">
           <ul className="flex flex-wrap gap-2">
+            {list.gifts.length === 0 && (
+              <li className="flex items-center gap-2 rounded-lg border border-neutral-300 bg-neutral-200 p-1 text-sm text-neutral-500">
+                <CircleSlash2 className="text-neutral-400" size={20} />
+                Empty
+              </li>
+            )}
+
             {list.gifts.map(({ gift }, idx) => (
               <li
                 key={gift.name}
