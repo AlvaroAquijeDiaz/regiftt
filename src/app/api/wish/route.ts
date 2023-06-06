@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { NewWishSchema } from "~/app/_ui/my-wishes/my-wishes.schemas";
 import { env } from "~/env.mjs";
+import { truncate } from "~/lib/utils";
 import { db } from "~/server/db";
 import { withRouteMiddleware } from "~/server/with-route-middleware";
 
@@ -32,6 +33,10 @@ const newWish = withRouteMiddleware(
           slug: generatedID,
           visible: out?.private,
           sharableURL: sharableURL,
+          linkMetaImage: out?.linkMeta?.image,
+          linkMetaTitle: out?.linkMeta?.title,
+          linkMetaShortDescription:
+            out?.linkMeta?.description && truncate(out?.linkMeta?.description || "", 50),
           owner: {
             connect: {
               id: token.id,

@@ -11,18 +11,17 @@ export const metadata: Metadata = {
     url: "https://regiftt.vercel.app",
     title: "Regiftt",
     description: "The new social media to share wishes and desires",
-    images: [
+    images:
       "https://res.cloudinary.com/dplsjufzf/image/upload/v1685921448/OpenGraph_Image_r3jn1r.svg",
-    ],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Regiftt",
+    site: "regifttapp",
     description: "The new social media to share wishes and desires",
-    images: [
+    images:
       "https://res.cloudinary.com/dplsjufzf/image/upload/v1685921448/OpenGraph_Image_r3jn1r.svg",
-    ],
     creator: "@alvaro_dotdev",
   },
   metadataBase: new URL("https://regiftt.vercel.app"),

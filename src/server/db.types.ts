@@ -29,6 +29,9 @@ export type Gift = {
   visible: Generated<number>;
   selected: Generated<number>;
   sharableURL: Generated<string>;
+  linkMetaTitle: string | null;
+  linkMetaShortDescription: string | null;
+  linkMetaImage: string | null;
   ownerId: string | null;
   selectedByUserId: string | null;
   createdAt: Generated<Timestamp>;

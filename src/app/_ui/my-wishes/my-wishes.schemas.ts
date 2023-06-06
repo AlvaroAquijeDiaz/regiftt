@@ -16,6 +16,13 @@ export const NewWishSchema = z.object({
     .optional(),
   tags: z.array(z.string()).optional().default([]),
   private: z.boolean().default(false),
+  linkMeta: z
+    .object({
+      title: z.string().optional(),
+      description: z.string().optional(),
+      image: z.string().optional(),
+    })
+    .optional(),
 });
 
 export type NewWishSchema = z.infer<typeof NewWishSchema>;

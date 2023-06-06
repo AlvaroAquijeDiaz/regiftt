@@ -22,14 +22,18 @@ datasource db {
 model Gift {
     id          String  @id @default(cuid())
     name        String
-    description String?
+    description String? @db.Text()
     image       String?
-    link        String?
+    link        String? @db.Text()
     price       Float?
     slug        String  @unique
     visible     Boolean @default(true)
     selected    Boolean @default(false)
     sharableURL String  @default("")
+
+    linkMetaTitle            String?
+    linkMetaShortDescription String?
+    linkMetaImage            String?
 
     owner            User?   @relation(fields: [ownerId], references: [id], name: "allMyGifts")
     ownerId          String?

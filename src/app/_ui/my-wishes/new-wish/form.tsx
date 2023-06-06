@@ -26,6 +26,7 @@ export const NewWishForm = ({ onClose }: { onClose?: (v: boolean) => void | unde
     formState: { errors, isSubmitting },
     watch,
     setValue,
+    resetField,
   } = useForm<NewWishSchema>({
     resolver: zodResolver(NewWishSchema),
     defaultValues: {
@@ -99,7 +100,12 @@ export const NewWishForm = ({ onClose }: { onClose?: (v: boolean) => void | unde
                 {watch("priceKnown") && <span className="text-sm text-indigo-600">Estimate</span>}
               </p>
 
-              <Switch onCheckedChange={(v) => setValue("priceKnown", v)} />
+              <Switch
+                onCheckedChange={(v) => {
+                  setValue("priceKnown", v);
+                  resetField("price");
+                }}
+              />
             </div>
 
             <Input<NewWishSchema>
@@ -107,10 +113,10 @@ export const NewWishForm = ({ onClose }: { onClose?: (v: boolean) => void | unde
               showLabel={false}
               errors={errors}
               disabled={!watch("priceKnown")}
-              rules={{
-                setValueAs: (v) => (!!v ? Number(v) : undefined),
-              }}
               displayName="price"
+              rules={{
+                valueAsNumber: true,
+              }}
               placeholder="$250,000"
             />
           </div>
