@@ -46,6 +46,7 @@ export type List = {
   dueOn: Generated<Timestamp>;
   visible: Generated<number>;
   sharableURL: Generated<string>;
+  slug: string;
   ownerId: string | null;
   createdAt: Generated<Timestamp>;
   updatedAt: Timestamp;

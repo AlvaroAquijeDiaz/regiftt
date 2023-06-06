@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { DetailsForm } from "~/ui/profile/details";
+import { DetailsForm } from "~/app/_ui/profile/details";
 
 export default function Profile() {
   return (

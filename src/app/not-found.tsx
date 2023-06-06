@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { Button } from "~/ui/shared/button";
+import { Button } from "~/app/_ui/shared/button";
 
 export default function ErrorPage() {
   return (

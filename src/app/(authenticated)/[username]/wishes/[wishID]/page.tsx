@@ -1,5 +1,5 @@
+import { WishProductCard } from "~/app/_ui/home/wish-product-card";
 import { getWishBySlug } from "~/server/routes/getWishBySlug";
-import { WishProductCard } from "~/ui/home/wish-product-card";
 
 export default async function WishIDByUsername({
   params,

@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { ListsGrid } from "~/ui/my-wishes/lists-grid";
+import { ListsGrid } from "~/app/_ui/my-wishes/lists-grid";
 
 export default function MyListsPage() {
   return (

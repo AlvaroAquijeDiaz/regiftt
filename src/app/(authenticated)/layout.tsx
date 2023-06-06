@@ -1,5 +1,5 @@
-import { Nav } from "~/ui/home/nav";
-import { Sidebar } from "~/ui/home/sidebar";
+import { Nav } from "~/app/_ui/home/nav";
+import { Sidebar } from "~/app/_ui/home/sidebar";
 
 export default function AuthenticatedLayout({ children }: { children: React.ReactNode }) {
   return (

@@ -1,7 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link, { type LinkProps } from "next/link";
-import { Button } from "~/ui/shared/button";
+import { Button } from "~/app/_ui/shared/button";
 import { MouseFollower } from "./_ui/mouse-follower";
 
 export default function Landing() {

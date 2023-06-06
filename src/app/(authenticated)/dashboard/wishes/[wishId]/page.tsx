@@ -1,6 +1,6 @@
 import { Suspense } from "react";
-import Details from "~/ui/my-wishes/[wishID]/details";
-import { Spinner } from "~/ui/shared/spinner";
+import Details from "~/app/_ui/my-wishes/[wishID]/details";
+import { Spinner } from "~/app/_ui/shared/spinner";
 
 // TODO: Make the blobs animated and moving around
 export default function WishIDPage({ params: { wishId } }: { params: { wishId: string } }) {

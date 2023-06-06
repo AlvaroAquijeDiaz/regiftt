@@ -1,6 +1,6 @@
 import { Github, Instagram, Linkedin, Twitter } from "lucide-react";
 import Link, { type LinkProps } from "next/link";
-import { Button } from "~/ui/shared/button";
+import { Button } from "~/app/_ui/shared/button";
 
 const myLinks = [
   {

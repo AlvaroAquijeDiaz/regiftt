@@ -52,7 +52,7 @@ export const withRouteMiddleware = <T, V extends ZodRawShape>(
     } catch (error) {
       return new Response(
         JSON.stringify({
-          error: "Something went wrong during validation",
+          error: "Validation Error - @withRouteMiddleware",
         }),
         { status: 500 }
       );

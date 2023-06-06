@@ -1,5 +1,4 @@
 import { type ReactNode } from "react";
-import { Return } from "~/ui/my-wishes/return";
 
 export default function WishIDLayout({ children }: { children: ReactNode }) {
   /**
@@ -8,8 +7,6 @@ export default function WishIDLayout({ children }: { children: ReactNode }) {
    */
   return (
     <section className="mx-auto">
-      <Return />
-
       <section>{children}</section>
     </section>
   );

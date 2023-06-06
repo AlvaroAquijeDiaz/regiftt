@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import Loader from "~/ui/my-wishes/[wishID]/loader";
+import Loader from "~/app/_ui/my-wishes/[wishID]/loader";
 import { GiftsByUsername } from "./gifts-by-username";
 import { UserDetails } from "./user-details";
 

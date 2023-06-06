@@ -1,12 +1,16 @@
 import { NextResponse } from "next/server";
+import { newListSchema } from "~/app/_ui/my-wishes/my-wishes.schemas";
+import { env } from "~/env.mjs";
 import { type SWRError } from "~/lib/fetcher";
 import { db } from "~/server/db";
 import { withRouteMiddleware } from "~/server/with-route-middleware";
-import { newListSchema } from "~/ui/my-wishes/my-wishes.schemas";
 
 const newList = withRouteMiddleware(
   async ({ token, out }) => {
     try {
+      const generatedSlug = `${out?.name.replaceAll(" ", "-") || ""}-${Date.now()}`;
+      const sharableURL = `${env.NEXTAUTH_URL}/${token.username}/lists/${generatedSlug}`;
+
       const data = await db.list.create({
         data: {
           name: out?.name,
@@ -16,6 +20,9 @@ const newList = withRouteMiddleware(
               id: token.id,
             },
           },
+          sharableURL,
+          slug: generatedSlug,
+          visible: !out?.private,
           gifts: {
             create: out?.wishIDs?.map((gift) => ({
               gift: {

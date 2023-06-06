@@ -1,12 +1,11 @@
-import { Spinner } from "~/ui/shared/spinner";
+import Image from "next/image";
 
 export default function Loading() {
   return (
-    <div className="min-h-screen min-w-full">
-      <span className="mx-auto my-auto">
-        Main App on it&apos;s way...
-        <Spinner />
-      </span>
+    <div className="flex min-h-screen min-w-full flex-col items-center justify-center">
+      <div className="animate-pulse">
+        <Image src="/favicon.ico" alt="Logo" width={200} height={200} />
+      </div>
     </div>
   );
 }

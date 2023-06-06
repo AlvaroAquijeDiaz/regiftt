@@ -1,9 +1,9 @@
 import { getToken, type JWT } from "next-auth/jwt";
 import { type NextRequest } from "next/server";
+import { editProfileSchema, type EditProfileSchema } from "~/app/_ui/profile/profile.schemas";
 import { env } from "~/env.mjs";
 import { db } from "~/server/db";
 import { type User } from "~/server/db.types";
-import { editProfileSchema, type EditProfileSchema } from "~/ui/profile/profile.schemas";
 
 export const GET = async (req: NextRequest) => {
   const session = await getToken({

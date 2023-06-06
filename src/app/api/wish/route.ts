@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
+import { NewWishSchema } from "~/app/_ui/my-wishes/my-wishes.schemas";
 import { env } from "~/env.mjs";
 import { db } from "~/server/db";
 import { withRouteMiddleware } from "~/server/with-route-middleware";
-import { NewWishSchema } from "~/ui/my-wishes/my-wishes.schemas";
 
 const newWish = withRouteMiddleware(
   async ({ token, out }) => {
@@ -11,29 +11,17 @@ const newWish = withRouteMiddleware(
       const generatedID = `${out?.name.toString().replaceAll(" ", "-") as string}-${nowInMS}`;
       const baseURL = env.NEXTAUTH_URL;
 
-      /**
-       * TODO: FIX: Find why the fuck is the getToken() function not returning the username
-       */
-      const owner = await db.user.findUniqueOrThrow({
-        where: {
-          id: token.id,
-        },
-        select: {
-          username: true,
-        },
-      });
-
-      if (!owner.username) {
+      if (!token.username) {
         return NextResponse.json(
           {
-            error: "Something went wrong",
+            error: "Authentication error, please re-login",
             ok: false,
           },
-          { status: 413 }
+          { status: 404 }
         );
       }
 
-      const sharableURL = `${baseURL}/${owner.username}/${generatedID}`;
+      const sharableURL = `${baseURL}/${token.username}/wishes/${generatedID}`;
 
       const data = await db.gift.create({
         data: {
@@ -61,10 +49,10 @@ const newWish = withRouteMiddleware(
 
       return NextResponse.json(
         {
-          error: err.message,
+          ...err,
           ok: false,
         },
-        { status: 413 }
+        { status: 405 }
       );
     }
   },

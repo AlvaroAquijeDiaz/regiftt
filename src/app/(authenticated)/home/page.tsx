@@ -1,6 +1,6 @@
 import { Suspense } from "react";
-import { LatestWishes } from "~/ui/home/latest";
-import { Spinner } from "~/ui/shared/spinner";
+import { LatestWishes } from "~/app/_ui/home/latest";
+import { Spinner } from "~/app/_ui/shared/spinner";
 
 export default function Home() {
   return (
