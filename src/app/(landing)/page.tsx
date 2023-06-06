@@ -4,12 +4,14 @@ import Link, { type LinkProps } from "next/link";
 import { Button } from "~/app/_ui/shared/button";
 import { MouseFollower } from "./_ui/mouse-follower";
 
+export const runtime = "edge";
+
 export default function Landing() {
   return (
     <section className="flex min-h-full flex-col items-center justify-between text-neutral-100">
       <section className="z-10 flex max-w-3xl flex-col items-center gap-4">
         <header className="mb-4 flex select-none items-center  gap-4">
-          <Image src="/favicon.ico" alt="Logo" width={80} height={80} />
+          <Image src="/favicon.ico" alt="Logo" width={80} height={80} priority />
           <h1 className="text-center text-4xl font-black md:text-6xl">Welcome to Regiftt</h1>
         </header>
 
