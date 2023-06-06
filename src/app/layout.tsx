@@ -7,22 +7,20 @@ export const metadata: Metadata = {
       url: "https://twitter.com/@alvaro_dotdev",
     },
   ],
+  twitter: {
+    card: "summary",
+    title: "Regiftt",
+    site: "@regiftt.app",
+    description: "The new social media to share wishes and desires",
+    images: "https://regiftt.vercel.app/api/og",
+    creator: "@alvaro_dotdev",
+  },
   openGraph: {
     url: "https://regiftt.vercel.app",
     title: "Regiftt",
     description: "The new social media to share wishes and desires",
-    images:
-      "https://res.cloudinary.com/dplsjufzf/image/upload/v1685921448/OpenGraph_Image_r3jn1r.svg",
+    images: "https://regiftt.vercel.app/api/og",
     type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Regiftt",
-    site: "@regiftt.app",
-    description: "The new social media to share wishes and desires",
-    images:
-      "https://res.cloudinary.com/dplsjufzf/image/upload/v1685921448/OpenGraph_Image_r3jn1r.svg",
-    creator: "@alvaro_dotdev",
   },
   metadataBase: new URL("https://regiftt.vercel.app/api/og"),
 };

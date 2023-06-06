@@ -2,13 +2,17 @@ import { ImageResponse } from "next/server";
 
 export const runtime = "edge";
 
-export function GET() {
+export function GET(req: Request) {
+  const url = new URL(req.url);
+
   const Image = (
     // eslint-disable-next-line @next/next/no-img-element
     <img
-      src="https://res.cloudinary.com/dplsjufzf/image/upload/v1685921448/OpenGraph_Image_r3jn1r.svg"
+      src={`${url.origin}/og/OpenGraph.svg`}
       alt="OG"
       className="rounded-md bg-neutral-800"
+      width={1200}
+      height={630}
     />
   );
 
