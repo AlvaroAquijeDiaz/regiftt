@@ -1,10 +1,39 @@
 import { ArrowRight } from "lucide-react";
+import { type Metadata } from "next";
 import Image from "next/image";
 import Link, { type LinkProps } from "next/link";
 import { Button } from "~/app/_ui/shared/button";
 import { MouseFollower } from "./_ui/mouse-follower";
 
-export const runtime = "edge";
+export const dynamic = "force-static";
+
+export const metadata: Metadata = {
+  twitter: {
+    card: "summary_large_image",
+    title: "Regiftt",
+    site: "@alvaro_dotdev",
+    description: "The new social media to share wishes and desires",
+    creator: "@alvaro_dotdev",
+    images: "https://regiftt.vercel.app/og/regiftt.png",
+  },
+  openGraph: {
+    url: "https://regiftt.vercel.app",
+    title: "Regiftt",
+    description: "The new social media to share wishes and desires",
+    images: {
+      url: "https://regiftt.vercel.app/og/regiftt.png",
+      width: 1200,
+      height: 630,
+    },
+    type: "website",
+  },
+  alternates: {
+    languages: {
+      en: "/",
+      es: "/es",
+    },
+  },
+};
 
 export default function Landing() {
   return (

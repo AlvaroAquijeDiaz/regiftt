@@ -1,6 +1,7 @@
 export const metadata: Metadata = {
   title: "Regiftt",
   description: "The new social media to share wishes and desires",
+  robots: "all",
   viewport: {
     width: "device-width",
     initialScale: 1,
@@ -12,27 +13,6 @@ export const metadata: Metadata = {
       url: "https://twitter.com/@alvaro_dotdev",
     },
   ],
-  twitter: {
-    card: "summary_large_image",
-    title: "Regiftt",
-    site: "@alvaro_dotdev",
-    description: "The new social media to share wishes and desires",
-    creator: "@alvaro_dotdev",
-    images: "https://regiftt.vercel.app/og/regiftt.png",
-  },
-  openGraph: {
-    url: "https://regiftt.vercel.app",
-    title: "Regiftt",
-    description: "The new social media to share wishes and desires",
-    images: {
-      url: "https://regiftt.vercel.app/og/regiftt.png",
-      width: 1200,
-      height: 630,
-    },
-    locale: "en",
-    alternateLocale: "es",
-    type: "website",
-  },
   icons: {
     icon: "/favicon.ico",
   },
@@ -42,7 +22,7 @@ export const metadata: Metadata = {
     canonical: "/",
     languages: {
       es: "/es",
-      en: "/en",
+      en: "/",
     },
   },
 };
