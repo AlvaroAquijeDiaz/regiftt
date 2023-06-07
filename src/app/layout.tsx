@@ -18,6 +18,7 @@ export const metadata: Metadata = {
     site: "@alvaro_dotdev",
     description: "The new social media to share wishes and desires",
     creator: "@alvaro_dotdev",
+    images: "https://regiftt.vercel.app/og/regiftt.png",
   },
   openGraph: {
     url: "https://regiftt.vercel.app",
