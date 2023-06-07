@@ -1,6 +1,6 @@
 export const metadata: Metadata = {
   title: "Regiftt",
-  description: "The new social media to share wishes and desires",
+  description: "The new social media app to share and receive gifts",
   robots: "all",
   viewport: {
     width: "device-width",

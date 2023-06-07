@@ -10,14 +10,14 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Regiftt",
     site: "@alvaro_dotdev",
-    description: "The new social media to share wishes and desires",
+    description: "The new social media app to share and receive gifts",
     creator: "@alvaro_dotdev",
     images: "https://regiftt.vercel.app/og/regiftt.png",
   },
   openGraph: {
     url: "https://regiftt.vercel.app",
     title: "Regiftt",
-    description: "The new social media to share wishes and desires",
+    description: "The new social media app to share and receive gifts",
     images: {
       url: "https://regiftt.vercel.app/og/regiftt.png",
       width: 1200,
