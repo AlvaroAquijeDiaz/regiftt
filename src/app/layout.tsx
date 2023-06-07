@@ -14,27 +14,25 @@ export const metadata: Metadata = {
     site: "@alvaro_dotdev",
     description: "The new social media to share wishes and desires",
     creator: "@alvaro_dotdev",
-    images: [
-      {
-        url: new URL("https://regiftt.vercel.app/og/regiftt.png"),
-        type: "image/png",
-        width: 1200,
-        height: 630,
-      },
-    ],
+    images: {
+      url: "https://regiftt.vercel.app/og/regiftt.png",
+      type: "image/png",
+      width: 1200,
+      height: 630,
+      alt: "Regiftt",
+      username: "@alvaro_dotdev",
+    },
   },
   openGraph: {
     url: "https://regiftt.vercel.app",
     title: "Regiftt",
     description: "The new social media to share wishes and desires",
-    images: [
-      {
-        url: new URL("https://regiftt.vercel.app/og/regiftt.png"),
-        type: "image/png",
-        width: 1200,
-        height: 630,
-      },
-    ],
+    // images: {
+    //   url: "https://regiftt.vercel.app/og/regiftt.png",
+    //   type: "image/png",
+    //   width: 1200,
+    //   height: 630,
+    // },
     locale: "en",
     alternateLocale: "es",
     type: "website",
