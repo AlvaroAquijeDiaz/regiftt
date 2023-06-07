@@ -13,17 +13,17 @@ export const metadata: Metadata = {
     title: "Regiftt",
     site: "@alvaro_dotdev",
     description: "The new social media to share wishes and desires",
-    images: "https://regiftt.vercel.app/og/regiftt.png",
     creator: "@alvaro_dotdev",
+    images: new URL("https://regiftt.vercel.app/og/regiftt.png"),
   },
   openGraph: {
     url: "https://regiftt.vercel.app",
     title: "Regiftt",
     description: "The new social media to share wishes and desires",
-    images: "https://regiftt.vercel.app/og/regiftt.png",
+    images: new URL("https://regiftt.vercel.app/og/regiftt.png"),
   },
   icons: "https://regiftt.vercel.app/favicon.ico",
-  metadataBase: new URL("https://regiftt.vercel.app/api/og"),
+  metadataBase: new URL("https://regiftt.vercel.app"),
   generator: "Regiftt v0.0.1",
 };
 
