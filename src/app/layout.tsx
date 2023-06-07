@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     description: "The new social media to share wishes and desires",
     creator: "@alvaro_dotdev",
     images: {
-      url: new URL("https://ibb.co/b2s7K5m"),
+      url: new URL("https://i.ibb.co/z7XN4Vx/og.png"),
       type: "image/png",
       width: 1200,
       height: 630,
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     title: "Regiftt",
     description: "The new social media to share wishes and desires",
     images: {
-      url: new URL("https://ibb.co/b2s7K5m"),
+      url: new URL("https://i.ibb.co/z7XN4Vx/og.png"),
       type: "image/png",
       width: 1200,
       height: 630,
