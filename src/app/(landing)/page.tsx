@@ -5,8 +5,6 @@ import Link, { type LinkProps } from "next/link";
 import { Button } from "~/app/_ui/shared/button";
 import { MouseFollower } from "./_ui/mouse-follower";
 
-export const dynamic = "force-static";
-
 export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
