@@ -1,7 +1,11 @@
 export const metadata: Metadata = {
   title: "Regiftt",
   description: "The new social media to share wishes and desires",
-  viewport: "width=device-width",
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+  },
   authors: [
     {
       name: "Alvaro Aquije",
@@ -14,22 +18,13 @@ export const metadata: Metadata = {
     site: "@alvaro_dotdev",
     description: "The new social media to share wishes and desires",
     creator: "@alvaro_dotdev",
-    images: {
-      url: new URL("https://i.ibb.co/z7XN4Vx/og.png"),
-      type: "image/png",
-      width: 1200,
-      height: 630,
-      alt: "Regiftt",
-      username: "@alvaro_dotdev",
-    },
   },
   openGraph: {
     url: "https://regiftt.vercel.app",
     title: "Regiftt",
     description: "The new social media to share wishes and desires",
     images: {
-      url: new URL("https://i.ibb.co/z7XN4Vx/og.png"),
-      type: "image/png",
+      url: "https://regiftt.vercel.app/og/regiftt.png",
       width: 1200,
       height: 630,
     },
@@ -37,9 +32,18 @@ export const metadata: Metadata = {
     alternateLocale: "es",
     type: "website",
   },
-  icons: "/favicon.ico",
+  icons: {
+    icon: "/favicon.ico",
+  },
   metadataBase: new URL("https://regiftt.vercel.app/"),
   generator: "Regiftt v0.0.1",
+  alternates: {
+    canonical: "/",
+    languages: {
+      es: "/es",
+      en: "/en",
+    },
+  },
 };
 
 import { Analytics } from "@vercel/analytics/react";
