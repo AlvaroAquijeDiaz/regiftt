@@ -23,6 +23,7 @@ const newList = withRouteMiddleware(
           sharableURL,
           slug: generatedSlug,
           visible: !out?.private,
+          dueOn: out?.dueOn,
           gifts: {
             create: out?.wishIDs?.map((gift) => ({
               gift: {
