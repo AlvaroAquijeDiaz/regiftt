@@ -20,7 +20,7 @@ export const WishProductCard = ({
   return (
     <article
       className={cn(
-        "flex max-w-full flex-col gap-4 overflow-hidden rounded-xl border bg-white shadow-lg",
+        "flex max-w-full flex-col gap-4 overflow-hidden rounded-xl border-2 border-dashed bg-white shadow-lg dark:bg-gray-900 dark:shadow-none",
         wish.image ? "pb-6" : "py-6"
       )}
     >

@@ -11,45 +11,47 @@ export const Preview = ({
 }) => {
   if (metatags.isLoading) {
     return (
-      <div className="flex h-full flex-col justify-center gap-4">
-        <div className="inline-flex h-full w-full items-center justify-center rounded-lg border bg-input px-4 text-center text-sm">
-          <Spinner />
-        </div>
-      </div>
-    );
-  }
-
-  if (!metatags.data) {
-    return (
-      <div className="flex h-full flex-col justify-center gap-4">
-        <div className="inline-flex h-full w-full items-center justify-center rounded-lg border bg-input px-4 text-center text-sm">
-          <span className="italic text-neutral-500">URL Preview</span>
-        </div>
+      <div className="inline-flex h-[290px] w-full items-center justify-center overflow-hidden rounded-lg border border-border bg-input text-sm">
+        <Spinner />
       </div>
     );
   }
 
   return (
-    <div className="inline-flex h-full max-h-full w-full flex-col items-center gap-2 overflow-hidden rounded-lg border bg-input text-center text-sm">
-      <div className="flex h-[136px] max-h-[140px] flex-col justify-center overflow-hidden">
-        {!metatags.data.image ? (
-          <svg>
-            <rect width="100%" height="100%" fill="#ddd" />
-          </svg>
-        ) : (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={metatags.data.image} alt="test" className="w-full object-cover" />
-        )}
-      </div>
+    <div className="flex min-h-[290px] w-full flex-col items-start gap-1.5 overflow-hidden rounded-lg border border-border bg-input text-sm">
+      {!metatags.data ? (
+        <div className="inline-flex min-h-full w-full items-center justify-center px-4 text-sm">
+          <span className="italic text-neutral-500">URL Preview</span>
+        </div>
+      ) : (
+        <>
+          <div className="max-h-[180px] min-h-[180px] overflow-hidden">
+            {!metatags.data.image ? (
+              <svg className="h-full min-h-full max-w-full">
+                <rect width="100%" height="100%" fill="#ddd" />
+              </svg>
+            ) : (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={metatags.data.image}
+                alt="test"
+                className="h-full min-w-full self-center justify-self-center object-cover"
+                loading="lazy"
+                width={303}
+              />
+            )}
+          </div>
 
-      <section className="flex flex-col px-2">
-        <span>{getDomainWithoutWWW(metatags.data.from)}</span>
+          <section className="flex flex-col items-start justify-between px-2 sm:px-4">
+            <span className="text-neutral-700">{getDomainWithoutWWW(metatags.data.from)}</span>
 
-        <span className="font-bold">{truncate(metatags.data?.title, 120)}</span>
-        <span className="text-xs text-neutral-500">
-          {truncate(metatags.data?.description, 100)}
-        </span>
-      </section>
+            <span className="font-bold">{truncate(metatags.data?.title, 120)}</span>
+            <span className="text-xs text-neutral-500">
+              {truncate(metatags.data?.description, 100)}
+            </span>
+          </section>
+        </>
+      )}
     </div>
   );
 };

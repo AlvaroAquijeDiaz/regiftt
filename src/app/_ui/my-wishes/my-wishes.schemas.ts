@@ -32,6 +32,7 @@ export const newListSchema = z.object({
   description: z.string().max(1000).optional(),
   wishIDs: z.array(z.string()).optional().default([]),
   private: z.boolean().default(false),
+  dueOn: z.date().optional(),
 });
 
 export type NewListSchema = z.infer<typeof newListSchema>;

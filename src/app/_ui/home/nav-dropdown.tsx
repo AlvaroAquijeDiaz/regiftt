@@ -7,6 +7,7 @@ import {
   DropdownContent,
   DropdownItem,
   DropdownLabel,
+  DropdownSeparator,
   DropdownSub,
   DropdownSubContent,
   DropdownSubTrigger,
@@ -23,7 +24,9 @@ export const NavDropdown = () => {
       </Suspense>
 
       <DropdownContent sideOffset={10} className="w-[270px]">
-        <DropdownLabel className="text-sm text-neutral-300">My Account</DropdownLabel>
+        <DropdownLabel className="text-sm text-neutral-200">My Account</DropdownLabel>
+
+        <DropdownSeparator className="bg-neutral-400" />
 
         <Link href="/profile">
           <DropdownItem>

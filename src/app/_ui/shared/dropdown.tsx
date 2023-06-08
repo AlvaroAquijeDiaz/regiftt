@@ -46,7 +46,7 @@ const DropdownSubContent = React.forwardRef<
     <DropdownMenuPrimitive.SubContent
       ref={ref}
       className={cn(
-        "z-50 min-w-[8rem] overflow-hidden rounded-lg border bg-black/80 p-1 text-neutral-50 backdrop-blur-sm backdrop-filter animate-in data-[side=bottom]:slide-in-from-top-1 data-[side=left]:slide-in-from-right-1 data-[side=right]:slide-in-from-left-1 data-[side=top]:slide-in-from-bottom-1",
+        "z-50 min-w-[8rem] overflow-hidden rounded-lg border border-border bg-neutral-900/80 p-1 text-neutral-50 backdrop-blur-md backdrop-filter animate-in data-[side=bottom]:slide-in-from-top-1 data-[side=left]:slide-in-from-right-1 data-[side=right]:slide-in-from-left-1 data-[side=top]:slide-in-from-bottom-1",
         className
       )}
       {...props}
@@ -64,7 +64,7 @@ const DropdownContent = React.forwardRef<
       ref={ref}
       sideOffset={sideOffset}
       className={cn(
-        "z-50 min-w-[10rem] rounded-lg border bg-black/80 p-2 text-neutral-50 shadow-md backdrop-blur-sm animate-in data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+        "z-50 min-w-[10rem] rounded-lg border border-border bg-neutral-900/80 p-2 text-neutral-50 shadow-md backdrop-blur-md animate-in data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
         className
       )}
       {...props}
@@ -156,7 +156,7 @@ const DropdownSeparator = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DropdownMenuPrimitive.Separator
     ref={ref}
-    className={cn("-mx-1 my-1 h-px bg-muted", className)}
+    className={cn("-mx-1 my-1 h-px bg-border", className)}
     {...props}
   />
 ));

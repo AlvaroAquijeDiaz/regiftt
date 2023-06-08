@@ -1,6 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { EyeOff, Tag } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import useSWR, { useSWRConfig } from "swr";
@@ -18,6 +19,7 @@ import { Preview } from "./preview";
 
 export const NewWishForm = ({ onClose }: { onClose?: (v: boolean) => void | undefined }) => {
   const { mutate } = useSWRConfig();
+  const [addMore, setAddMore] = useState(false);
   const r = useRouter();
 
   const {
@@ -27,6 +29,7 @@ export const NewWishForm = ({ onClose }: { onClose?: (v: boolean) => void | unde
     watch,
     setValue,
     resetField,
+    reset,
   } = useForm<NewWishSchema>({
     resolver: zodResolver(NewWishSchema),
     defaultValues: {
@@ -78,7 +81,8 @@ export const NewWishForm = ({ onClose }: { onClose?: (v: boolean) => void | unde
      * @description SWR Keys MUST be the same, arrays included
      */
     await mutate("/api/wish");
-    onClose && onClose(false);
+    onClose && !addMore && onClose(false);
+    reset();
     r.push("/dashboard/wishes");
   };
 
@@ -140,21 +144,21 @@ export const NewWishForm = ({ onClose }: { onClose?: (v: boolean) => void | unde
             }}
           />
 
-          <div className="flex gap-4">
-            <label className="flex select-none items-center gap-2 rounded-lg border border-neutral-300 px-2 py-1 text-sm font-medium">
+          <div className="flex items-center gap-4">
+            <label className="flex h-auto select-none items-center gap-2 rounded-lg border border-neutral-300 px-2 py-1.5 text-sm font-medium">
               <Checkbox defaultChecked={false} onCheckedChange={(v) => setValue("private", !!v)} />
               <EyeOff size={15} />
               Private
             </label>
 
-            <Button variant="optional" size="sm" type="button">
+            <Button variant="optional" size="sm" type="button" className="">
               <Tag size={15} />
               Tags
             </Button>
           </div>
         </div>
 
-        <div className="flex flex-col gap-4">
+        <div className="flex min-h-full flex-col gap-2">
           <Input<NewWishSchema>
             register={register}
             errors={errors}
@@ -172,13 +176,36 @@ export const NewWishForm = ({ onClose }: { onClose?: (v: boolean) => void | unde
         </div>
       </section>
 
-      <Button
-        type="submit"
-        disabled={isSubmitting || (debouncedURL && !previewURL.data ? true : false)}
-      >
-        {isSubmitting && <Spinner />}
-        {!isSubmitting && "Create"}
-      </Button>
+      <section className="flex items-center gap-2">
+        <Button
+          type="submit"
+          disabled={isSubmitting || (debouncedURL && !previewURL.data ? true : false)}
+        >
+          {isSubmitting && <Spinner />}
+          {!isSubmitting && "Create!"}
+        </Button>
+
+        <fieldset
+          className="group flex h-full select-none items-center gap-1.5 rounded-full px-5"
+          name="addMore"
+        >
+          <Switch
+            className="h-[15px] w-[30px] group-hover:bg-neutral-200 group-hover:data-[state=checked]:bg-indigo-400"
+            name="addMore"
+            checked={addMore}
+            onCheckedChange={setAddMore}
+            thumbClassName="h-3 w-3 data-[state=checked]:translate-x-3.5"
+          />
+
+          <label
+            htmlFor="addMore"
+            className="py-2.5 text-sm font-semibold text-neutral-700"
+            onClick={() => setAddMore((prev) => !prev)}
+          >
+            Add More
+          </label>
+        </fieldset>
+      </section>
     </form>
   );
 };

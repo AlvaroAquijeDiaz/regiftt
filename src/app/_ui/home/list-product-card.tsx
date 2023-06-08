@@ -50,7 +50,7 @@ export const ListProductCard = ({
         <section className="">
           <ul className="flex flex-wrap gap-2">
             {list.gifts.length === 0 && (
-              <li className="flex items-center gap-2 rounded-lg border border-neutral-300 bg-neutral-200 p-1 text-sm text-neutral-500">
+              <li className="flex h-14 w-full items-center gap-2 rounded-lg border border-neutral-300 bg-neutral-200 p-1 text-sm text-neutral-500">
                 <CircleSlash2 className="text-neutral-400" size={20} />
                 Empty
               </li>
