@@ -40,8 +40,8 @@
     --background: 0 0% 11%;
     --foreground: 0 0% 95%;
 
-    --muted: 223 47% 11%;
-    --muted-foreground: 215.4 16.3% 56.9%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 60%;
 
     --popover: 224 71% 4%;
     --popover-foreground: 215 20.2% 65.1%;
@@ -50,11 +50,11 @@
     --card-foreground: 213 31% 91%;
 
     /* TODO: May change this border */
-    --border: 240, 5%, 26%;
-    --input: 0, 0%, 19%;
+    --border: 0 0% 32%;
+    --input: 0 0% 19%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 1.2%;
+    --primary: 0 0% 0%;
+    --primary-foreground: 0 0% 90%;
 
     --secondary: 222.2 47.4% 11.2%;
     --secondary-foreground: 210 40% 98%;
@@ -83,7 +83,7 @@
 
 @layer base {
   body {
-    @apply bg-neutral-100 text-foreground;
+    @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
