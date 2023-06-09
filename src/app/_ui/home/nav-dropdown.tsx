@@ -23,7 +23,7 @@ export const NavDropdown = () => {
         <UserDropdown />
       </Suspense>
 
-      <DropdownContent sideOffset={10} className="w-[270px]">
+      <DropdownContent sideOffset={10} className="w-[260px]">
         <DropdownLabel className="text-sm text-neutral-200">My Account</DropdownLabel>
 
         <DropdownSeparator className="bg-neutral-400" />

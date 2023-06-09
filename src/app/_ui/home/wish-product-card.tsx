@@ -18,72 +18,74 @@ export const WishProductCard = ({
   };
 }) => {
   return (
-    <article
-      className={cn(
-        "flex max-w-full flex-col gap-4 overflow-hidden rounded-xl border-2 border-dashed bg-white shadow-lg dark:bg-gray-900 dark:shadow-none",
-        wish.image ? "pb-6" : "py-6"
-      )}
-    >
-      {wish.image && (
-        <div className="pattern-isometric max-h-[400px] overflow-hidden pattern-neutral-100 pattern-opacity-100 pattern-size-6">
-          <Image
-            src={wish.image}
-            width={800}
-            height={200}
-            alt={wish.name}
-            className="z-10 max-h-[400px] w-full max-w-full border-b border-neutral-200 object-contain"
-            loading="lazy"
-          />
-        </div>
-      )}
-
-      <section className="flex flex-col gap-3 px-6">
-        <div className="flex flex-1 items-center gap-2">
-          {wish.owner?.image && (
-            <Link href={`/${wish.owner.username || ""}` as LinkProps["href"]} passHref>
-              <Image
-                src={wish.owner?.image}
-                height={40}
-                width={40}
-                alt={wish.owner.username || ""}
-                className="rounded-full"
-              />
-            </Link>
-          )}
-
-          <div className="flex flex-col">
-            <Link
-              href={`/${wish.owner?.username || ""}/wishes/${wish.slug}` as LinkProps["href"]}
-              passHref
-            >
-              <h3 className="font-bold capitalize md:text-lg">{wish.name}</h3>
-            </Link>
-
-            <Link href={`/${wish.owner?.username || ""}` as LinkProps["href"]}>
-              <p className="text-sm font-[500] text-neutral-500 underline-offset-1 hover:underline">
-                @{wish.owner?.username} on {wish.updatedAt?.toLocaleString()}
-              </p>
-            </Link>
+    <article className="flex flex-col gap-0">
+      <div
+        className={cn(
+          "flex max-w-full flex-col gap-4 overflow-hidden rounded-xl border-2 border-dashed border-border bg-white shadow-lg dark:bg-gray-900 dark:shadow-none",
+          wish.image ? "pb-6" : "py-6"
+        )}
+      >
+        {wish.image && (
+          <div className="pattern-isometric max-h-[400px] overflow-hidden pattern-neutral-100 pattern-opacity-100 pattern-size-6">
+            <Image
+              src={wish.image}
+              width={800}
+              height={200}
+              alt={wish.name}
+              className="z-10 max-h-[400px] w-full max-w-full border-b border-neutral-200 object-contain"
+              loading="lazy"
+            />
           </div>
-        </div>
+        )}
 
-        <Link
-          href={`/${wish.owner?.username || ""}/wishes/${wish.slug}` as LinkProps["href"]}
-          passHref
-        >
-          <div className="flex flex-col gap-2">
-            <p className="text-neutral-600">{wish.description || "No Description Provided"}</p>
+        <section className="flex flex-col gap-3 px-6">
+          <div className="flex flex-1 items-center gap-2">
+            {wish.owner?.image && (
+              <Link href={`/${wish.owner.username || ""}` as LinkProps["href"]} passHref>
+                <Image
+                  src={wish.owner?.image}
+                  height={40}
+                  width={40}
+                  alt={wish.owner.username || ""}
+                  className="rounded-full"
+                />
+              </Link>
+            )}
 
-            {wish.price && <p className="text-sm font-bold">${wish.price}</p>}
+            <div className="flex flex-col">
+              <Link
+                href={`/${wish.owner?.username || ""}/wishes/${wish.slug}` as LinkProps["href"]}
+                passHref
+              >
+                <h3 className="font-bold capitalize md:text-lg">{wish.name}</h3>
+              </Link>
 
-            <p>{wish.link} - Link Previews are coming!</p>
-
-            <p>{wish.sharableURL}</p>
+              <Link href={`/${wish.owner?.username || ""}` as LinkProps["href"]}>
+                <p className="text-sm font-[500] text-neutral-500 underline-offset-1 hover:underline">
+                  @{wish.owner?.username} on {wish.updatedAt?.toLocaleString()}
+                </p>
+              </Link>
+            </div>
           </div>
-        </Link>
 
-        <div>Selected ?</div>
-      </section>
+          <Link
+            href={`/${wish.owner?.username || ""}/wishes/${wish.slug}` as LinkProps["href"]}
+            passHref
+          >
+            <div className="flex flex-col gap-2">
+              <p className="text-neutral-600">{wish.description || "No Description Provided"}</p>
+
+              {wish.price && <p className="text-sm font-bold">${wish.price}</p>}
+
+              <p>{wish.link} - Link Previews are coming!</p>
+
+              <p>{wish.sharableURL}</p>
+            </div>
+          </Link>
+
+          <div>Selected ?</div>
+        </section>
+      </div>
     </article>
   );
 };

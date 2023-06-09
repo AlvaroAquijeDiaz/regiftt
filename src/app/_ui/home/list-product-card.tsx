@@ -23,36 +23,38 @@ export const ListProductCard = ({
   };
 }) => {
   return (
-    <article className="flex flex-col overflow-hidden rounded-lg border shadow-lg transition-all duration-150">
-      <div className="flex-shrink-0">
-        {list.image && (
-          <Image
-            className="h-48 w-full object-cover"
-            src={list.image}
-            alt=""
-            width={300}
-            height={150}
-          />
-        )}
-      </div>
+    <article className="flex w-full flex-col gap-0">
+      <div className="flex flex-col overflow-hidden rounded-lg shadow-lg transition-all duration-150">
+        <div className="flex-shrink-0">
+          {list.image && (
+            <Image
+              className="h-48 w-full object-cover"
+              src={list.image}
+              alt=""
+              width={300}
+              height={150}
+            />
+          )}
+        </div>
 
-      <div className="flex flex-1 flex-col justify-between bg-white p-6">
-        <Link
-          href={`/${list.owner?.username || ""}/lists/${list.slug}` as LinkProps["href"]}
-          passHref
-        >
-          <div className="flex-1">
-            <p className="text-xl font-bold capitalize text-gray-900">{list.name}</p>
-            <p className="mt-3 text-base text-gray-500">{list.description}</p>
-          </div>
-        </Link>
+        <div className="flex flex-1 flex-col justify-between bg-white p-6">
+          <Link
+            href={`/${list.owner?.username || ""}/lists/${list.slug}` as LinkProps["href"]}
+            passHref
+          >
+            <div className="flex-1">
+              <p className="text-xl font-bold capitalize text-gray-900">{list.name}</p>
+              <p className="mt-3 text-sm text-gray-500">
+                {list.description || <span className="italic">No description provided</span>}
+              </p>
+            </div>
+          </Link>
 
-        <section className="">
-          <ul className="flex flex-wrap gap-2">
+          <ul className="mt-3 flex flex-wrap gap-2">
             {list.gifts.length === 0 && (
-              <li className="flex h-14 w-full items-center gap-2 rounded-lg border border-neutral-300 bg-neutral-200 p-1 text-sm text-neutral-500">
+              <li className="flex items-center gap-2 rounded-lg border border-neutral-300 bg-neutral-200 px-4 py-1.5 text-sm text-neutral-500">
                 <CircleSlash2 className="text-neutral-400" size={20} />
-                Empty
+                Empty List
               </li>
             )}
 
@@ -75,37 +77,37 @@ export const ListProductCard = ({
               </li>
             ))}
           </ul>
-        </section>
 
-        <Link href={`/${list.owner?.username || ""}` as LinkProps["href"]} passHref>
-          <div className="mt-6 flex items-center">
-            <div className="flex-shrink-0">
-              <span className="sr-only">{list.owner?.username}</span>
-              {list.owner?.image && (
-                <Image
-                  className="h-10 w-10 rounded-full"
-                  src={list.owner.image}
-                  alt=""
-                  width={40}
-                  height={40}
-                />
-              )}
-            </div>
+          <Link href={`/${list.owner?.username || ""}` as LinkProps["href"]} passHref>
+            <div className="mt-6 flex items-center">
+              <div className="flex-shrink-0">
+                <span className="sr-only">{list.owner?.username}</span>
+                {list.owner?.image && (
+                  <Image
+                    className="h-10 w-10 rounded-full"
+                    src={list.owner.image}
+                    alt=""
+                    width={40}
+                    height={40}
+                  />
+                )}
+              </div>
 
-            <div className="ml-3">
-              <p className="text-sm font-medium text-gray-900 hover:underline">
-                {list.owner?.username}
-              </p>
-              <div className="flex space-x-1 text-sm text-gray-500">
-                <time dateTime={list.createdAt.toDateString()}>
-                  {list.createdAt.toLocaleDateString()}
-                </time>
-                <span aria-hidden="true">&middot;</span>
-                <span>{list._count.gifts} items</span>
+              <div className="ml-3">
+                <p className="text-sm font-medium text-gray-900 hover:underline">
+                  {list.owner?.username}
+                </p>
+                <div className="flex space-x-1 text-sm text-gray-500">
+                  <time dateTime={list.createdAt.toDateString()}>
+                    {list.createdAt.toLocaleDateString()}
+                  </time>
+                  <span aria-hidden="true">&middot;</span>
+                  <span>{list._count.gifts} items</span>
+                </div>
               </div>
             </div>
-          </div>
-        </Link>
+          </Link>
+        </div>
       </div>
     </article>
   );

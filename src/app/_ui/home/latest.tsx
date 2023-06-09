@@ -58,7 +58,7 @@ export const LatestWishes = async () => {
   const lists = await getLatestLists();
 
   return (
-    <section className="grid grid-cols-1 gap-8">
+    <section className="grid grid-cols-1 gap-8 sm:gap-12">
       {lists.map((list) => (
         <ListProductCard key={list.id} list={list} />
       ))}

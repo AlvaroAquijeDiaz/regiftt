@@ -24,15 +24,15 @@ export const UserDropdown = () => {
   }
 
   return (
-    <DropdownTrigger asChild className="w-full cursor-pointer select-none text-sm">
+    <DropdownTrigger asChild className="w-full cursor-pointer select-none py-1 text-sm">
       <p className="flex items-center justify-between">
         {user.data.image ? (
           <Image
             src={user.data.image}
             alt={user.data.name || "User Profile Picture"}
             className="rounded-full"
-            width={30}
-            height={30}
+            width={26}
+            height={26}
             priority={true}
           />
         ) : (
