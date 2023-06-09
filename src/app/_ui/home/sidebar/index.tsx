@@ -31,27 +31,28 @@ export const Sidebar = ({ isSheet = false }: { isSheet?: boolean }) => {
         "relative text-sm",
         isSheet
           ? "mt-3 flex min-h-full w-full flex-col gap-4 p-0"
-          : "left-0 top-0 z-20 flex h-screen w-[300px] flex-col gap-3.5 overflow-y-hidden border-r border-border bg-neutral-100/70 pb-3 pt-8 text-sm transition-transform duration-75 dark:bg-muted max-lg:fixed max-lg:-translate-x-full lg:sticky lg:min-w-[290px] lg:pt-2"
+          : "left-0 top-0 z-20 mt-1 flex h-screen w-[300px] flex-col overflow-y-hidden border-r border-border bg-white/70 pb-3 pt-8 text-sm transition-transform duration-75 dark:bg-muted max-lg:fixed max-lg:-translate-x-full lg:sticky lg:min-w-[290px] lg:pt-2"
       )}
     >
-      <div className="mx-4 flex select-none items-center justify-between gap-1 rounded-lg border bg-white px-2 py-1">
+      <div className="mx-4 flex select-none items-center justify-between rounded-lg border bg-white px-2">
         <NavDropdown />
       </div>
 
-      <DropdownSeparator className="bg-border" />
-      <span className="mx-4 text-lg font-bold">Make</span>
+      <div className="mt-7 flex flex-col gap-4">
+        <span className="mx-4 text-lg font-bold">I want a ...</span>
 
-      <NewListOrGift />
+        <NewListOrGift />
 
-      <DropdownSeparator className="bg-border" />
+        <DropdownSeparator className="bg-border" />
 
-      <ul className="flex flex-col gap-1 px-4">
-        {segments.map((segment) => (
-          <Link href={segment.path} key={segment.name}>
-            <SidebarSegment segment={segment} />
-          </Link>
-        ))}
-      </ul>
+        <ul className="flex flex-col gap-1 px-4">
+          {segments.map((segment) => (
+            <Link href={segment.path} key={segment.name}>
+              <SidebarSegment segment={segment} />
+            </Link>
+          ))}
+        </ul>
+      </div>
     </aside>
   );
 };

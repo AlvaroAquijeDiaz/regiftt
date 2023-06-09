@@ -83,7 +83,7 @@
 
 @layer base {
   body {
-    @apply bg-background text-foreground;
+    @apply bg-neutral-100 text-foreground dark:bg-neutral-900;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
