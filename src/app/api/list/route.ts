@@ -62,16 +62,20 @@ const all = withRouteMiddleware(async ({ token }) => {
     orderBy: {
       createdAt: "desc",
     },
-    select: {
-      id: true,
-      name: true,
-      visible: true,
+    include: {
+      owner: {
+        select: {
+          username: true,
+          image: true,
+        },
+      },
+      _count: true,
       gifts: {
         select: {
           gift: {
             select: {
-              id: true,
               name: true,
+              image: true,
             },
           },
         },
@@ -82,6 +86,6 @@ const all = withRouteMiddleware(async ({ token }) => {
   return NextResponse.json(lists);
 });
 
-export { newList as POST, all as GET };
+export { all as GET, newList as POST };
 
 export type NewListReturnHandler = Awaited<ReturnType<typeof newList>>;

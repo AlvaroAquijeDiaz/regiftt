@@ -2,26 +2,26 @@ import { type Gift } from "@prisma/client/edge";
 import Image from "next/image";
 import Link, { type LinkProps } from "next/link";
 import { cn } from "~/lib/cn";
+import { RelativeTime } from "./relative-time";
 
-export const WishProductCard = ({
-  wish,
-}: {
-  wish: Omit<Gift, "createdAt" | "visible" | "selectedByUserId"> & {
-    owner?: {
-      username: string | null;
-      image: string | null;
-    } | null;
-    viewerIsOwner?: boolean;
-    createdAt?: Date;
-    visible?: boolean;
-    selectedByUserId?: string | null;
-  };
-}) => {
+export type GiftWithExtraParams = Omit<Gift, "createdAt" | "visible" | "selectedByUserId"> & {
+  owner?: {
+    username: string | null;
+    image: string | null;
+  } | null;
+  viewerIsOwner?: boolean;
+  createdAt?: Date;
+  visible?: boolean;
+  selectedByUserId?: string | null;
+};
+
+export const WishProductCard = ({ wish }: { wish: GiftWithExtraParams }) => {
   return (
     <article className="flex flex-col gap-0">
       <div
         className={cn(
           "flex max-w-full flex-col gap-4 overflow-hidden rounded-xl border-2 border-dashed border-border bg-white shadow-lg dark:bg-gray-900 dark:shadow-none",
+          "transition-all hover:-translate-y-2 hover:shadow-xl hover:shadow-violet-200",
           wish.image ? "pb-6" : "py-6"
         )}
       >
@@ -62,7 +62,8 @@ export const WishProductCard = ({
 
               <Link href={`/${wish.owner?.username || ""}` as LinkProps["href"]}>
                 <p className="text-sm font-[500] text-neutral-500 underline-offset-1 hover:underline">
-                  @{wish.owner?.username} on {wish.updatedAt?.toLocaleString()}
+                  @{wish.owner?.username} &middot;{" "}
+                  {wish.createdAt && <RelativeTime date={wish.createdAt} />}
                 </p>
               </Link>
             </div>

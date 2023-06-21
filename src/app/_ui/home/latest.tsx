@@ -1,9 +1,9 @@
 import { db } from "~/server/db";
-import { ListProductCard } from "./list-product-card";
-import { WishProductCard } from "./wish-product-card";
+import { ListProductCard, type ListWithExtraParams } from "./list-product-card";
+import { WishProductCard, type GiftWithExtraParams } from "./wish-product-card";
 
 const getLatestGifts = async () => {
-  return await db.gift.findMany({
+  const res = await db.gift.findMany({
     take: 10,
     orderBy: {
       updatedAt: "desc",
@@ -20,10 +20,15 @@ const getLatestGifts = async () => {
       },
     },
   });
+
+  return res.map((gift) => ({
+    ...gift,
+    type: "gift",
+  }));
 };
 
 const getLatestLists = async () => {
-  return await db.list.findMany({
+  const res = await db.list.findMany({
     take: 10,
     orderBy: {
       updatedAt: "desc",
@@ -51,21 +56,30 @@ const getLatestLists = async () => {
       },
     },
   });
+
+  return res.map((list) => ({
+    ...list,
+    type: "list",
+  }));
 };
 
 export const LatestWishes = async () => {
   const gifts = await getLatestGifts();
   const lists = await getLatestLists();
 
+  const all = [...gifts, ...lists].sort((a, b) => {
+    return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
+  });
+
   return (
     <section className="grid grid-cols-1 gap-8 sm:gap-12">
-      {lists.map((list) => (
-        <ListProductCard key={list.id} list={list} />
-      ))}
+      {all.map((item) => {
+        if (item.type === "gift") {
+          return <WishProductCard key={item.id} wish={item as GiftWithExtraParams} />;
+        }
 
-      {gifts.map((gift) => (
-        <WishProductCard key={gift.id} wish={gift} />
-      ))}
+        return <ListProductCard key={item.id} list={item as ListWithExtraParams} />;
+      })}
     </section>
   );
 };
