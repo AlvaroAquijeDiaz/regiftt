@@ -1,3 +1,4 @@
+import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 import { NewWishSchema } from "~/app/_ui/my-wishes/my-wishes.schemas";
 import { env } from "~/env.mjs";
@@ -45,6 +46,8 @@ const newWish = withRouteMiddleware(
         },
       });
 
+      revalidatePath(`/home`);
+
       return NextResponse.json({
         ...data,
         ok: true,
@@ -81,5 +84,4 @@ const allWishes = withRouteMiddleware(async ({ token }) => {
   return NextResponse.json(wishes);
 });
 
-export { newWish as POST };
-export { allWishes as GET };
+export { allWishes as GET, newWish as POST };

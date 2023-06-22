@@ -1,3 +1,4 @@
+import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 import { newListSchema } from "~/app/_ui/my-wishes/my-wishes.schemas";
 import { env } from "~/env.mjs";
@@ -35,6 +36,8 @@ const newList = withRouteMiddleware(
           },
         },
       });
+
+      revalidatePath(`/home`);
 
       return NextResponse.json({
         ...data,
