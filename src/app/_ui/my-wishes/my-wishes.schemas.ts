@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const NewWishSchema = z.object({
+export const newWishSchema = z.object({
   name: z.string().min(1).max(100),
   description: z.string().max(1000).optional(),
   url: z.string().optional(),
@@ -25,7 +25,7 @@ export const NewWishSchema = z.object({
     .optional(),
 });
 
-export type NewWishSchema = z.infer<typeof NewWishSchema>;
+export type NewWishSchema = z.infer<typeof newWishSchema>;
 
 export const newListSchema = z.object({
   name: z.string().min(1).max(100),

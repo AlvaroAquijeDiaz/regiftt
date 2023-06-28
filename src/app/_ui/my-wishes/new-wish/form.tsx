@@ -14,7 +14,7 @@ import { useDebounce } from "~/lib/useDebounce";
 import { isValidUrl } from "~/lib/utils";
 import { Button } from "../../shared/button";
 import { Input } from "../../shared/input";
-import { NewWishSchema } from "../my-wishes.schemas";
+import { newWishSchema, type NewWishSchema } from "../my-wishes.schemas";
 import { Preview } from "./preview";
 
 export const NewWishForm = ({ onClose }: { onClose?: (v: boolean) => void | undefined }) => {
@@ -31,7 +31,7 @@ export const NewWishForm = ({ onClose }: { onClose?: (v: boolean) => void | unde
     resetField,
     reset,
   } = useForm<NewWishSchema>({
-    resolver: zodResolver(NewWishSchema),
+    resolver: zodResolver(newWishSchema),
     defaultValues: {
       name: "",
       price: undefined,

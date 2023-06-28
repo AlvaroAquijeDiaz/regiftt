@@ -1,6 +1,6 @@
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
-import { NewWishSchema } from "~/app/_ui/my-wishes/my-wishes.schemas";
+import { newWishSchema } from "~/app/_ui/my-wishes/my-wishes.schemas";
 import { env } from "~/env.mjs";
 import { truncate } from "~/lib/utils";
 import { db } from "~/server/db";
@@ -65,7 +65,7 @@ const newWish = withRouteMiddleware(
     }
   },
   {
-    validator: NewWishSchema,
+    validator: newWishSchema,
   }
 );
 
